@@ -26,6 +26,7 @@ const App = () => {
               alignSelf: 'center',
             },
             headerTitleAlign: 'center',
+            headerShown: false,
           }}>
           <Stack.Screen name={Screens.LOGIN} component={Login} />
           <Stack.Screen name={Screens.REGISTRATION} component={Registration} />
