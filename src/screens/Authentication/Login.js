@@ -1,31 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 import {
   StyleSheet,
-  Button,
   View,
   Image,
   TextInput,
   SafeAreaView,
-  KeyboardAvoidingView,
   Keyboard,
-  Platform,
   TouchableOpacity,
   Text,
 } from 'react-native';
 import Screens from '../../constants/Screens';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  STATUS_BAR_HEIGHT,
-} from '../../utils/DeviceUtils';
+import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 
 const FOOTER_HEIGHT = 50;
 
 const Login = ({navigation}) => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+
+  const ref_password_input = useRef();
 
   const login = () => {
     Keyboard.dismiss();
@@ -39,13 +34,10 @@ const Login = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
-        style={{
-          flex: 1,
-          height: SCREEN_HEIGHT - STATUS_BAR_HEIGHT,
-        }}
         contentContainerStyle={{
           justifyContent: 'center',
           alignItems: 'center',
+          flexGrow: 1,
         }}>
         <Image
           style={styles.instagramText}
@@ -53,10 +45,13 @@ const Login = ({navigation}) => {
         />
         <View style={styles.loginForm}>
           <TextInput
-            style={styles.textInput}
+            style={{...styles.textInput, marginTop: 0}}
             value={username}
             onChangeText={setUsername}
             placeholder="Phone number, email or username"
+            blurOnSubmit={false}
+            returnKeyType="next"
+            onSubmitEditing={() => ref_password_input.current.focus()}
           />
           <TextInput
             style={styles.textInput}
@@ -64,6 +59,7 @@ const Login = ({navigation}) => {
             secureTextEntry={true}
             onChangeText={setPassword}
             placeholder="Password"
+            ref={ref_password_input}
           />
           <TouchableOpacity onPress={() => login()}>
             <View style={styles.loginButton}>
@@ -103,7 +99,7 @@ const Login = ({navigation}) => {
               <Text
                 style={{
                   color: '#727272',
-                  fontWeight: '600',
+                  fontWeight: 'bold',
                   fontSize: 14,
                 }}>
                 OR
@@ -114,13 +110,25 @@ const Login = ({navigation}) => {
             onPress={() => loginWithFb()}
             style={{
               marginBottom: 20,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                marginRight: 10,
+                resizeMode: 'contain',
+              }}
+              source={require('../../assets/logo_fb_rounded.png')}
+            />
             <Text style={styles.loginFbButtonText}>Log in with Facebook</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
       <View style={styles.footer}>
-        <View style={{...styles.divideLine, marginBottom: 0}} />
+        <View style={styles.divideLine} />
         <TouchableOpacity
           onPress={null}
           style={{
@@ -160,7 +168,7 @@ const styles = StyleSheet.create({
     height: FOOTER_HEIGHT,
   },
   instagramText: {
-    marginTop: 100,
+    marginTop: 20,
     marginBottom: 20,
     tintColor: '#000',
     resizeMode: 'contain',
@@ -209,12 +217,6 @@ const styles = StyleSheet.create({
     left: (SCREEN_WIDTH * 0.9 - 40) / 2,
     paddingHorizontal: 10,
     backgroundColor: '#fefefe',
-  },
-  orText: {
-    color: '#727272',
-    fontSize: 12,
-    textAlign: 'center',
-    fontWeight: 'bold',
   },
   loginFbButtonText: {
     textAlign: 'center',
