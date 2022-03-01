@@ -17,11 +17,26 @@ import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 const FOOTER_HEIGHT = 50;
 
 const Login = ({navigation}) => {
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [isLoginAllowed, setIsLoginAllowed] = useState(false);
 
   const ref_password_input = useRef();
+
+  const checkLoginAllowed = (user, pass) => {
+    setIsLoginAllowed(user.length > 0 && pass.length >= 6);
+  };
+
+  const onUsernameChanged = newValue => {
+    setUsername(newValue);
+    checkLoginAllowed(newValue, password);
+  };
+
+  const onPasswordChanged = newValue => {
+    setPassword(newValue);
+    checkLoginAllowed(username, newValue);
+  };
 
   const login = () => {
     Keyboard.dismiss();
@@ -49,7 +64,7 @@ const Login = ({navigation}) => {
             <TextInput
               style={{...styles.textInput, marginTop: 0}}
               value={username}
-              onChangeText={setUsername}
+              onChangeText={newVal => onUsernameChanged(newVal)}
               placeholder="Phone number, email or username"
               blurOnSubmit={false}
               returnKeyType="next"
@@ -61,7 +76,7 @@ const Login = ({navigation}) => {
               style={{...styles.textInput, marginRight: 40, flexGrow: 1}}
               value={password}
               secureTextEntry={isPasswordHidden}
-              onChangeText={setPassword}
+              onChangeText={newVal => onPasswordChanged(newVal)}
               placeholder="Password"
               ref={ref_password_input}
             />
@@ -87,7 +102,13 @@ const Login = ({navigation}) => {
               />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => login()}>
+          <TouchableOpacity
+            onPress={() => login()}
+            style={{
+              opacity: isLoginAllowed ? 1 : 0.6,
+            }}
+            disabled={!isLoginAllowed}
+            activeOpacity={0.6}>
             <View style={styles.loginButton}>
               <Text style={styles.loginButtonText}>Log in</Text>
             </View>
