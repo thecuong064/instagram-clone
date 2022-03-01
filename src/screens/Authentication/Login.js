@@ -19,6 +19,7 @@ const FOOTER_HEIGHT = 50;
 const Login = ({navigation}) => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
   const ref_password_input = useRef();
 
@@ -44,23 +45,48 @@ const Login = ({navigation}) => {
           source={require('../../assets/instagram_text.png')}
         />
         <View style={styles.loginForm}>
-          <TextInput
-            style={{...styles.textInput, marginTop: 0}}
-            value={username}
-            onChangeText={setUsername}
-            placeholder="Phone number, email or username"
-            blurOnSubmit={false}
-            returnKeyType="next"
-            onSubmitEditing={() => ref_password_input.current.focus()}
-          />
-          <TextInput
-            style={styles.textInput}
-            value={password}
-            secureTextEntry={true}
-            onChangeText={setPassword}
-            placeholder="Password"
-            ref={ref_password_input}
-          />
+          <View style={{...styles.textInputWrapper, marginTop: 0}}>
+            <TextInput
+              style={{...styles.textInput, marginTop: 0}}
+              value={username}
+              onChangeText={setUsername}
+              placeholder="Phone number, email or username"
+              blurOnSubmit={false}
+              returnKeyType="next"
+              onSubmitEditing={() => ref_password_input.current.focus()}
+            />
+          </View>
+          <View style={{...styles.textInputWrapper, flexDirection: 'row'}}>
+            <TextInput
+              style={{...styles.textInput, marginRight: 40, flexGrow: 1}}
+              value={password}
+              secureTextEntry={isPasswordHidden}
+              onChangeText={setPassword}
+              placeholder="Password"
+              ref={ref_password_input}
+            />
+            <TouchableOpacity
+              onPress={() => setIsPasswordHidden(!isPasswordHidden)}
+              style={{
+                width: 40,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              activeOpacity={0.5}>
+              <Image
+                source={
+                  isPasswordHidden
+                    ? require('../../assets/ic_eye_hidden.png')
+                    : require('../../assets/ic_eye_visible.png')
+                }
+                style={{
+                  height: 20,
+                  width: 20,
+                  tintColor: isPasswordHidden ? '#9b9b9b' : '#0095f4',
+                }}
+              />
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={() => login()}>
             <View style={styles.loginButton}>
               <Text style={styles.loginButtonText}>Log in</Text>
@@ -174,14 +200,17 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: 50,
   },
-  textInput: {
+  textInputWrapper: {
     height: 50,
-    padding: 10,
     marginVertical: 7.5,
     borderRadius: 4,
     borderColor: '#e2e2e2',
     backgroundColor: '#f9f9f9',
     borderWidth: 1,
+    fontSize: 14,
+  },
+  textInput: {
+    paddingHorizontal: 10,
     fontSize: 14,
   },
   loginButton: {
