@@ -42,6 +42,11 @@ const Login = ({navigation}) => {
     Keyboard.dismiss();
   };
 
+  const gotoRegistration = () => {
+    Keyboard.dismiss();
+    navigation.navigate(Screens.REGISTRATION);
+  };
+
   const loginWithFb = () => {
     Keyboard.dismiss();
   };
@@ -87,7 +92,7 @@ const Login = ({navigation}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              activeOpacity={0.5}>
+              activeOpacity={0.8}>
               <Image
                 source={
                   isPasswordHidden
@@ -177,7 +182,8 @@ const Login = ({navigation}) => {
       <View style={styles.footer}>
         <View style={styles.divideLine} />
         <TouchableOpacity
-          onPress={null}
+          onPress={gotoRegistration}
+          activeOpacity={1}
           style={{
             height: 20,
             top: (FOOTER_HEIGHT - 20) / 2,
