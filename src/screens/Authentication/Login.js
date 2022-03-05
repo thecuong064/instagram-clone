@@ -40,6 +40,7 @@ const Login = ({navigation}) => {
 
   const login = () => {
     Keyboard.dismiss();
+    navigation.navigate(Screens.MAIN);
   };
 
   const gotoRegistration = () => {

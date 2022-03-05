@@ -54,6 +54,7 @@ const Registration = ({navigation}) => {
 
   const signUp = () => {
     Keyboard.dismiss();
+    navigation.navigate(Screens.MAIN);
   };
 
   const goBack = () => {
@@ -181,7 +182,7 @@ const Registration = ({navigation}) => {
           )}
 
           <TouchableOpacity
-            onPress={() => goBack()}
+            onPress={signUp}
             style={{
               opacity: isSignupAllowed ? 1 : 0.6,
             }}
