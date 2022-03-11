@@ -142,7 +142,7 @@ const Login = ({navigation}) => {
           </TouchableOpacity>
           <View
             style={{
-              ...styles.divideLine,
+              ...styles.dividerLine,
               marginVertical: 20,
             }}>
             <View
@@ -181,7 +181,7 @@ const Login = ({navigation}) => {
         </View>
       </KeyboardAwareScrollView>
       <View style={styles.footer}>
-        <View style={styles.divideLine} />
+        <View style={styles.dividerLine} />
         <TouchableOpacity
           onPress={gotoRegistration}
           activeOpacity={1}
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
-  divideLine: {
+  dividerLine: {
     height: 1,
     backgroundColor: '#dadada',
   },
