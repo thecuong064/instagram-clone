@@ -7,29 +7,80 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
+import HomeHeader from '../../components/HomeHeader';
+import HomeStoriesList from '../../components/HomeStoriesList';
 
-const Header = () => {
-  return (
-    <View style={styles.header}>
-      <Image
-        style={styles.headerInsText}
-        resizeMode={'contain'}
-        source={require('../../assets/instagram_text.png')}
-      />
-      <TouchableOpacity style={styles.headerMsgButtonWrapper}>
-        <Image
-          style={styles.headerMsgButtonImg}
-          source={require('../../assets/ic_message.png')}
-        />
-      </TouchableOpacity>
-    </View>
-  );
-};
+const DATA = [
+  {
+    id: '1',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '2',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '3',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '4',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '5',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '6',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '11',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '12',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '13',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '14',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '15',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+  {
+    id: '16',
+    source: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+  },
+];
+
 const Home = navigation => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <HomeHeader />
+      <View style={styles.dividerLine} />
+      <HomeStoriesList data={DATA} />
       <View style={styles.dividerLine} />
       <Text>Home Page</Text>
     </SafeAreaView>
