@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   storiesWrapper: {
     height: 100,
     flexDirection: 'row',
+    backgroundColor: '#fafafa',
   },
   storiesFlatList: {
     alignItems: 'center',

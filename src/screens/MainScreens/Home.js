@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import HomeFeed from '../../components/HomeFeed';
 import HomeHeader from '../../components/HomeHeader';
 import HomeStoriesList from '../../components/HomeStoriesList';
 
@@ -82,7 +83,7 @@ const Home = navigation => {
       <View style={styles.dividerLine} />
       <HomeStoriesList data={DATA} />
       <View style={styles.dividerLine} />
-      <Text>Home Page</Text>
+      <HomeFeed data={DATA} />
     </SafeAreaView>
   );
 };
