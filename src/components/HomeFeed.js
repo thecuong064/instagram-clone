@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -11,67 +11,100 @@ import {
 } from 'react-native';
 import {SCREEN_WIDTH} from '../utils/DeviceUtils';
 
-const FeedPost = ({source, user}) => (
-  <View style={styles.feedPostWrapper}>
-    <View
-      style={{
-        ...styles.feedPostContentRowWrapper,
-        marginVertical: 10,
-      }}>
-      <Image style={styles.feedPostUserAvatar} source={{uri: source}} />
-      <Text style={styles.feedPostUsername}>{user}</Text>
-      <Image
+const FeedPost = ({source, user}) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  return (
+    <View style={styles.feedPostWrapper}>
+      <View
         style={{
-          ...styles.feedPostButton,
-          position: 'absolute',
-          right: 0,
-          marginRight: 10,
-        }}
-        source={require('../assets/ic_post_more.png')}
-      />
-    </View>
+          ...styles.feedPostContentRowWrapper,
+          marginVertical: 10,
+        }}>
+        <Image style={styles.feedPostUserAvatar} source={{uri: source}} />
+        <Text style={styles.feedPostUsername}>{user}</Text>
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            right: 0,
+            marginRight: 10,
+          }}>
+          <Image
+            style={{
+              height: 20,
+              width: 20,
+            }}
+            source={require('../assets/ic_post_more.png')}
+          />
+        </TouchableOpacity>
+      </View>
 
-    <Image style={styles.feedPostImg} source={{uri: source}} />
+      <Image style={styles.feedPostImg} source={{uri: source}} />
 
-    <View
-      style={{
-        ...styles.feedPostContentRowWrapper,
-        marginVertical: 10,
-      }}>
-      <Image
-        style={styles.feedPostButton}
-        source={require('../assets/ic_post_like.png')}
-      />
-      <Image
-        style={styles.feedPostButton}
-        source={require('../assets/ic_post_comment.png')}
-      />
-      <Image
-        style={styles.feedPostButton}
-        source={require('../assets/ic_post_direct.png')}
-      />
-      <Image
-        style={{...styles.feedPostButton, position: 'absolute', right: 0}}
-        source={require('../assets/ic_post_bookmark.png')}
-      />
-    </View>
-    <View style={{...styles.feedPostContentRowWrapper, marginBottom: 5}}>
-      <Text style={styles.feedPostLikeText}>999 likes</Text>
-    </View>
-    <View style={{...styles.feedPostContentRowWrapper, marginBottom: 5}}>
-      <Text style={{...styles.feedPostDescription, fontWeight: '700'}}>
-        {user}{' '}
-        <Text style={styles.feedPostDescription}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry
+      <View
+        style={{
+          ...styles.feedPostContentRowWrapper,
+          marginVertical: 10,
+        }}>
+        <TouchableOpacity
+          style={styles.feedPostButtonWrapper}
+          onPress={() => setIsLiked(!isLiked)}>
+          <Image
+            style={styles.feedPostButton}
+            source={
+              isLiked
+                ? require('../assets/ic_post_like_selected.png')
+                : require('../assets/ic_post_like.png')
+            }
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.feedPostButtonWrapper}>
+          <Image
+            style={styles.feedPostButton}
+            source={require('../assets/ic_post_comment.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.feedPostButtonWrapper}>
+          <Image
+            style={styles.feedPostButton}
+            source={require('../assets/ic_post_direct.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            ...styles.feedPostButtonWrapper,
+            position: 'absolute',
+            right: 0,
+          }}
+          onPress={() => setIsSaved(!isSaved)}>
+          <Image
+            style={styles.feedPostButton}
+            source={
+              isSaved
+                ? require('../assets/ic_post_save_selected.png')
+                : require('../assets/ic_post_save.png')
+            }
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={{...styles.feedPostContentRowWrapper, marginBottom: 5}}>
+        <Text style={styles.feedPostLikeText}>999 likes</Text>
+      </View>
+      <View style={{...styles.feedPostContentRowWrapper, marginBottom: 5}}>
+        <Text style={{...styles.feedPostDescription, fontWeight: '700'}}>
+          {user}{' '}
+          <Text style={styles.feedPostDescription}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry
+          </Text>
         </Text>
-      </Text>
+      </View>
+      <View style={styles.feedPostContentRowWrapper}>
+        <Text style={styles.feedPostTimestamp}>99 days ago</Text>
+      </View>
     </View>
-    <View style={styles.feedPostContentRowWrapper}>
-      <Text style={styles.feedPostTimestamp}>99 days ago</Text>
-    </View>
-  </View>
-);
+  );
+};
 
 const HomeFeed = ({data}) => {
   const renderItem = ({item}) => (
@@ -124,10 +157,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 10,
   },
+  feedPostButtonWrapper: {
+    marginRight: 20,
+  },
   feedPostButton: {
     width: 25,
     height: 25,
-    marginRight: 20,
   },
   feedPostLikeText: {
     fontWeight: '700',
