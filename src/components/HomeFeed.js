@@ -14,6 +14,10 @@ import {SCREEN_WIDTH} from '../utils/DeviceUtils';
 const FeedPost = ({source, user}) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [isDescMoreVisible, setIsDescMoreVisible] = useState(true);
+
+  const description =
+    'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
   return (
     <View style={styles.feedPostWrapper}>
       <View
@@ -93,10 +97,23 @@ const FeedPost = ({source, user}) => {
       <View style={{...styles.feedPostContentRowWrapper, marginBottom: 5}}>
         <Text style={{...styles.feedPostDescription, fontWeight: '700'}}>
           {user}{' '}
-          <Text style={styles.feedPostDescription}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry
-          </Text>
+          {description.length > 50 ? (
+            isDescMoreVisible ? (
+              <Text style={styles.feedPostDescription}>
+                {`${description.slice(0, 50)}`}
+                <Text
+                  onPress={() => setIsDescMoreVisible(false)}
+                  style={styles.feedPostDescriptionMore}>
+                  {' '}
+                  ...more
+                </Text>
+              </Text>
+            ) : (
+              <Text style={styles.feedPostDescription}>{description}</Text>
+            )
+          ) : (
+            <Text style={styles.feedPostDescription}>{description}</Text>
+          )}
         </Text>
       </View>
       <View style={styles.feedPostContentRowWrapper}>
@@ -172,6 +189,11 @@ const styles = StyleSheet.create({
   feedPostDescription: {
     fontWeight: '400',
     color: '#000',
+    fontSize: 14,
+  },
+  feedPostDescriptionMore: {
+    fontWeight: '400',
+    color: '#8e8e8e',
     fontSize: 14,
   },
   feedPostTimestamp: {
