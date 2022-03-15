@@ -13,7 +13,8 @@ import {SCREEN_WIDTH} from '../utils/DeviceUtils';
 
 const MAX_SHORT_DESC_LENGTH_LIMIT = 80;
 
-const FeedPost = ({source, user}) => {
+const FeedPost = ({post}) => {
+  const {id, userAvatar, user, photo} = post;
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [isDescMoreVisible, setIsDescMoreVisible] = useState(true);
@@ -27,7 +28,7 @@ const FeedPost = ({source, user}) => {
           ...styles.feedPostContentRowWrapper,
           marginVertical: 10,
         }}>
-        <Image style={styles.feedPostUserAvatar} source={{uri: source}} />
+        <Image style={styles.feedPostUserAvatar} source={{uri: userAvatar}} />
         <Text style={styles.feedPostUsername}>{user}</Text>
         <TouchableOpacity
           style={{
@@ -45,7 +46,7 @@ const FeedPost = ({source, user}) => {
         </TouchableOpacity>
       </View>
 
-      <Image style={styles.feedPostImg} source={{uri: source}} />
+      <Image style={styles.feedPostImg} source={{uri: photo}} />
 
       <View
         style={{
@@ -133,15 +134,13 @@ const FeedPost = ({source, user}) => {
   );
 };
 
-const HomeFeed = ({data}) => {
-  const renderItem = ({item}) => (
-    <FeedPost source={item.source} user={item.user} />
-  );
+const HomeFeed = ({posts}) => {
+  const renderItem = ({item}) => <FeedPost post={item} />;
 
   return (
     <View style={styles.feedWrapper}>
       <FlatList
-        data={data}
+        data={posts}
         keyExtractor={item => item.id}
         horizontal={false}
         renderItem={renderItem}

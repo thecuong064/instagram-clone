@@ -13,7 +13,7 @@ import HomeFeed from '../../components/HomeFeed';
 import HomeHeader from '../../components/HomeHeader';
 import HomeStoriesList from '../../components/HomeStoriesList';
 
-const DATA = [
+const stories = [
   {
     id: '1',
     source: 'https://reactjs.org/logo-og.png',
@@ -76,14 +76,89 @@ const DATA = [
   },
 ];
 
+const posts = [
+  {
+    id: '1',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '2',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '3',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '4',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '5',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '6',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '11',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '12',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '13',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '14',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '15',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+  {
+    id: '16',
+    userAvatar: 'https://reactjs.org/logo-og.png',
+    user: 'user.name',
+    photo: 'https://reactjs.org/logo-og.png',
+  },
+];
+
 const Home = navigation => {
   return (
     <SafeAreaView style={styles.container}>
       <HomeHeader />
       <View style={styles.dividerLine} />
-      <HomeStoriesList data={DATA} />
+      <HomeStoriesList data={stories} />
       <View style={styles.dividerLine} />
-      <HomeFeed data={DATA} />
+      <HomeFeed posts={posts} />
     </SafeAreaView>
   );
 };
