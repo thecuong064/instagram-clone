@@ -11,13 +11,15 @@ import {
 } from 'react-native';
 import {SCREEN_WIDTH} from '../utils/DeviceUtils';
 
+const MAX_SHORT_DESC_LENGTH_LIMIT = 80;
+
 const FeedPost = ({source, user}) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [isDescMoreVisible, setIsDescMoreVisible] = useState(true);
 
   const description =
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged";
   return (
     <View style={styles.feedPostWrapper}>
       <View
@@ -97,10 +99,10 @@ const FeedPost = ({source, user}) => {
       <View style={{...styles.feedPostContentRowWrapper, marginBottom: 5}}>
         <Text style={{...styles.feedPostDescription, fontWeight: '700'}}>
           {user}{' '}
-          {description.length > 50 ? (
+          {description.length > MAX_SHORT_DESC_LENGTH_LIMIT ? (
             isDescMoreVisible ? (
               <Text style={styles.feedPostDescription}>
-                {`${description.slice(0, 50)}`}
+                {`${description.slice(0, MAX_SHORT_DESC_LENGTH_LIMIT)}`}
                 <Text
                   onPress={() => setIsDescMoreVisible(false)}
                   style={styles.feedPostDescriptionMore}>
@@ -109,7 +111,15 @@ const FeedPost = ({source, user}) => {
                 </Text>
               </Text>
             ) : (
-              <Text style={styles.feedPostDescription}>{description}</Text>
+              <Text style={styles.feedPostDescription}>
+                {description}
+                <Text
+                  onPress={() => setIsDescMoreVisible(true)}
+                  style={styles.feedPostDescriptionMore}>
+                  {'\n'}
+                  Show less
+                </Text>
+              </Text>
             )
           ) : (
             <Text style={styles.feedPostDescription}>{description}</Text>
