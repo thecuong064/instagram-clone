@@ -14,7 +14,7 @@ import {SCREEN_WIDTH} from '../utils/DeviceUtils';
 const MAX_SHORT_DESC_LENGTH_LIMIT = 80;
 
 const FeedPost = ({post}) => {
-  const {id, userAvatar, user, photo} = post;
+  const {id, username, userPhoto, photo} = post;
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [isDescMoreVisible, setIsDescMoreVisible] = useState(true);
@@ -28,8 +28,8 @@ const FeedPost = ({post}) => {
           ...styles.feedPostContentRowWrapper,
           marginVertical: 10,
         }}>
-        <Image style={styles.feedPostUserAvatar} source={{uri: userAvatar}} />
-        <Text style={styles.feedPostUsername}>{user}</Text>
+        <Image style={styles.feedPostUserAvatar} source={{uri: userPhoto}} />
+        <Text style={styles.feedPostUsername}>{username}</Text>
         <TouchableOpacity
           style={{
             position: 'absolute',
@@ -99,7 +99,7 @@ const FeedPost = ({post}) => {
       </View>
       <View style={{...styles.feedPostContentRowWrapper, marginBottom: 5}}>
         <Text style={{...styles.feedPostDescription, fontWeight: '700'}}>
-          {user}{' '}
+          {username}{' '}
           {description.length > MAX_SHORT_DESC_LENGTH_LIMIT ? (
             isDescMoreVisible ? (
               <Text style={styles.feedPostDescription}>

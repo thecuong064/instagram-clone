@@ -1,23 +1,23 @@
 import ApiActionTypes from './constants';
 
-const initalImages = {
+const initPosts = {
   data: [],
   error: undefined,
 };
 
-const imagesReducer = (state = initalImages, action) => {
+const postsReducer = (state = initPosts, action) => {
   const {payload, type} = action;
 
   console.log(type);
 
   switch (type) {
-    case ApiActionTypes.LOAD_IMAGES_SUCCESS: {
+    case ApiActionTypes.LOAD_POSTS_SUCCESS: {
       return {
         data: payload,
         error: null,
       };
     }
-    case ApiActionTypes.LOAD_IMAGES_FAILED: {
+    case ApiActionTypes.LOAD_POSTS_FAILED: {
       return {
         data: [],
         error: payload,
@@ -28,4 +28,4 @@ const imagesReducer = (state = initalImages, action) => {
   }
 };
 
-export default imagesReducer;
+export default postsReducer;

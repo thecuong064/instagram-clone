@@ -10,24 +10,25 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const StoryItem = ({source, user}) => (
-  <TouchableOpacity style={styles.storyItemWrapper} activeOpacity={0.8}>
-    <LinearGradient
-      colors={['#CA1D7E', '#E35157', '#F2703F']}
-      start={{x: 0.0, y: 1.0}}
-      end={{x: 1.0, y: 1.0}}
-      style={styles.storyItemImgWrapperWithBorder}>
-      <Image style={styles.storyItemImg} source={{uri: source}} />
-    </LinearGradient>
+const StoryItem = ({story}) => {
+  const {id, userPhoto, username} = story;
+  return (
+    <TouchableOpacity style={styles.storyItemWrapper} activeOpacity={0.8}>
+      <LinearGradient
+        colors={['#CA1D7E', '#E35157', '#F2703F']}
+        start={{x: 0.0, y: 1.0}}
+        end={{x: 1.0, y: 1.0}}
+        style={styles.storyItemImgWrapperWithBorder}>
+        <Image style={styles.storyItemImg} source={{uri: userPhoto}} />
+      </LinearGradient>
 
-    <Text style={styles.storyItemName}>{user}</Text>
-  </TouchableOpacity>
-);
+      <Text style={styles.storyItemName}>{username}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const HomeStoriesList = ({data}) => {
-  const renderItem = ({item}) => (
-    <StoryItem source={item.source} user={item.user} />
-  );
+  const renderItem = ({item}) => <StoryItem story={item} />;
 
   return (
     <View style={styles.storiesWrapper}>
