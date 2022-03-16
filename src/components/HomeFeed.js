@@ -10,6 +10,7 @@ import {
   FlatList,
 } from 'react-native';
 import {SCREEN_WIDTH} from '../utils/DeviceUtils';
+import ScalableImage from 'react-native-scalable-image';
 
 const MAX_SHORT_DESC_LENGTH_LIMIT = 80;
 
@@ -46,7 +47,7 @@ const FeedPost = ({post}) => {
         </TouchableOpacity>
       </View>
 
-      <Image style={styles.feedPostImg} source={{uri: photo}} />
+      <ScalableImage width={SCREEN_WIDTH} source={{uri: photo}} />
 
       <View
         style={{
