@@ -64,12 +64,16 @@ const Home = navigation => {
     <SafeAreaView style={styles.container}>
       <HomeHeader />
       <View style={styles.dividerLine} />
-      <HomeStoriesList data={stories} />
-      <View style={styles.dividerLine} />
       <HomeFeed
         posts={posts}
         refreshControl={
           <RefreshControl onRefresh={reloadFeed} refreshing={isRefreshing} />
+        }
+        headerComponent={
+          <View>
+            <HomeStoriesList data={stories} />
+            <View style={styles.dividerLine} />
+          </View>
         }
       />
     </SafeAreaView>
