@@ -1,8 +1,10 @@
 import ApiActionTypes from './constants';
 
-export const getStories = () => ({
+export const getStories = (onSuccess, onFailed) => ({
   type: ApiActionTypes.GET_STORIES,
   payload: null,
+  onSuccess: onSuccess,
+  onFailed: onFailed,
 });
 
 export const loadStoriesSuccess = payload => ({
@@ -15,9 +17,11 @@ export const loadStoriesFailed = payload => ({
   payload: payload,
 });
 
-export const getPosts = () => ({
+export const getPosts = (onSuccess, onFailed) => ({
   type: ApiActionTypes.GET_POSTS,
   payload: null,
+  onSuccess: onSuccess,
+  onFailed: onFailed,
 });
 
 export const loadPostsSuccess = payload => ({

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 
 import {
@@ -6,9 +6,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  TouchableOpacity,
-  FlatList,
+  RefreshControl,
 } from 'react-native';
 import HomeFeed from '../../components/HomeFeed';
 import HomeHeader from '../../components/HomeHeader';
@@ -19,10 +17,43 @@ import {getStories, getPosts} from '../../redux/Home/actions';
 const Home = navigation => {
   const stories = useSelector(state => state.stories.data);
   const posts = useSelector(state => state.posts.data);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isFetchingStories, setIsFetchingStories] = useState(false);
+  const [isFetchingPosts, setIsFetchingPosts] = useState(false);
 
   const loadData = () => {
     store.dispatch(getStories());
     store.dispatch(getPosts());
+  };
+
+  const reloadFeed = () => {
+    setIsRefreshing(true);
+    setIsFetchingStories(true);
+    setIsFetchingPosts(true);
+    store.dispatch(
+      getStories(
+        onSuccess => {
+          setIsFetchingStories(false);
+          setIsRefreshing(isFetchingPosts);
+        },
+        onFailed => {
+          setIsFetchingStories(false);
+          setIsRefreshing(isFetchingPosts);
+        },
+      ),
+    );
+    store.dispatch(
+      getPosts(
+        onSuccess => {
+          setIsFetchingPosts(false);
+          setIsRefreshing(isFetchingStories);
+        },
+        onFailed => {
+          setIsFetchingPosts(false);
+          setIsRefreshing(isFetchingStories);
+        },
+      ),
+    );
   };
 
   useEffect(() => {
@@ -35,7 +66,12 @@ const Home = navigation => {
       <View style={styles.dividerLine} />
       <HomeStoriesList data={stories} />
       <View style={styles.dividerLine} />
-      <HomeFeed posts={posts} />
+      <HomeFeed
+        posts={posts}
+        refreshControl={
+          <RefreshControl onRefresh={reloadFeed} refreshing={isRefreshing} />
+        }
+      />
     </SafeAreaView>
   );
 };

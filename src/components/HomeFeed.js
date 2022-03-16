@@ -134,7 +134,7 @@ const FeedPost = ({post}) => {
   );
 };
 
-const HomeFeed = ({posts}) => {
+const HomeFeed = ({posts, refreshControl}) => {
   const renderItem = ({item}) => <FeedPost post={item} />;
 
   return (
@@ -146,6 +146,7 @@ const HomeFeed = ({posts}) => {
         renderItem={renderItem}
         contentContainerStyle={styles.feedFlatList}
         showsVerticalScrollIndicator={false}
+        refreshControl={refreshControl}
       />
     </View>
   );
@@ -166,6 +167,7 @@ const styles = StyleSheet.create({
   feedPostImg: {
     width: SCREEN_WIDTH,
     height: (SCREEN_WIDTH / 4) * 5,
+    resizeMode: 'contain',
   },
   feedPostContentRowWrapper: {
     marginLeft: 10,
