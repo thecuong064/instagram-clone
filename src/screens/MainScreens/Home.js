@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
+import {useScrollToTop} from '@react-navigation/native';
 
 import {
   SafeAreaView,
@@ -16,6 +17,9 @@ import store from '../../redux/configureStore';
 import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
 
 const Home = navigation => {
+  const feedRef = useRef(null);
+  useScrollToTop(feedRef);
+
   const stories = useSelector(state => state.stories.data);
   const posts = useSelector(state => state.posts.data);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -58,16 +62,16 @@ const Home = navigation => {
         params,
         newPosts => {
           setIsFetchingPosts(false);
+          setCanLoadMorePosts(true);
           setIsRefreshing(isFetchingStories);
         },
         error => {
           setIsFetchingPosts(false);
+          setCanLoadMorePosts(true);
           setIsRefreshing(isFetchingStories);
         },
       ),
     );
-
-    setCanLoadMorePosts(true);
   };
 
   const loadMorePosts = () => {
@@ -100,6 +104,7 @@ const Home = navigation => {
       <HomeHeader />
       <View style={styles.dividerLine} />
       <HomeFeed
+        ref={feedRef}
         posts={posts}
         refreshControl={
           <RefreshControl onRefresh={reloadFeed} refreshing={isRefreshing} />

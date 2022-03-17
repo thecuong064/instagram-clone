@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, forwardRef} from 'react';
 import {
   SafeAreaView,
   View,
@@ -136,7 +136,7 @@ const FeedPost = ({post}) => {
   );
 };
 
-const HomeFeed = props => {
+const HomeFeed = forwardRef((props, ref) => {
   const renderItem = ({item}) => <FeedPost post={item} />;
 
   const {posts, refreshControl, headerComponent, footerComponent, onLoadMore} =
@@ -145,6 +145,7 @@ const HomeFeed = props => {
   return (
     <View style={styles.feedWrapper}>
       <FlatListLoadMore
+        ref={ref}
         data={posts}
         keyExtractor={item => item.id}
         horizontal={false}
@@ -158,7 +159,7 @@ const HomeFeed = props => {
       />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   feedWrapper: {
