@@ -4,8 +4,10 @@ import postApi from '../../api/postApi';
 import {
   loadStoriesFailed,
   loadStoriesSuccess,
-  loadPostsFailed,
-  loadPostsSuccess,
+  getMorePostsSuccess,
+  getMorePostsFailed,
+  reloadPostsSuccess,
+  reloadPostsFailed,
 } from './actions';
 import ApiActionTypes from './constants';
 
@@ -25,23 +27,38 @@ export function* getStoriesAsync(props) {
   }
 }
 
-export function* getPostsAsync(props) {
-  const {onSuccess, onFailed} = props;
+export function* reloadPostsAsync(props) {
+  const {params, onSuccess, onFailed} = props;
   try {
-    let response = yield call(postApi.getAll);
+    let response = yield call(postApi.getAll, params);
     let data = response;
-    yield put(loadPostsSuccess(data));
+    yield put(reloadPostsSuccess(data));
     onSuccess?.(data);
   } catch (error) {
-    yield put(loadPostsFailed(error));
-    console.log('getPostsAsync error: ' + error);
+    yield put(reloadPostsFailed(error));
+    console.log('reloadPostsAsync error: ' + error);
+    onFailed?.(error);
+  }
+}
+
+export function* getMorePostsAsync(props) {
+  const {params, onSuccess, onFailed} = props;
+  try {
+    let response = yield call(postApi.getAll, params);
+    let data = response;
+    yield put(getMorePostsSuccess(data));
+    onSuccess?.(data);
+  } catch (error) {
+    yield put(getMorePostsFailed(error));
+    console.log('getMorePostsAsync error: ' + error);
     onFailed?.(error);
   }
 }
 
 function* getListCardWatch() {
   yield takeLatest(ApiActionTypes.GET_STORIES, getStoriesAsync);
-  yield takeLatest(ApiActionTypes.GET_POSTS, getPostsAsync);
+  yield takeLatest(ApiActionTypes.RELOAD_POSTS, reloadPostsAsync);
+  yield takeLatest(ApiActionTypes.GET_MORE_POSTS, getMorePostsAsync);
 }
 
 export default function* rootChild() {

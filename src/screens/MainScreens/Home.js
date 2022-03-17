@@ -7,12 +7,13 @@ import {
   Text,
   StyleSheet,
   RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
 import HomeFeed from '../../components/HomeFeed';
 import HomeHeader from '../../components/HomeHeader';
 import HomeStoriesList from '../../components/HomeStoriesList';
 import store from '../../redux/configureStore';
-import {getStories, getPosts} from '../../redux/Home/actions';
+import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
 
 const Home = navigation => {
   const stories = useSelector(state => state.stories.data);
@@ -20,11 +21,15 @@ const Home = navigation => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isFetchingStories, setIsFetchingStories] = useState(false);
   const [isFetchingPosts, setIsFetchingPosts] = useState(false);
+  const [isLoadingMorePosts, setIsLoadingMorePosts] = useState(false);
+  const [canLoadMorePosts, setCanLoadMorePosts] = useState(true);
+  const [pageCount, setPageCount] = useState(0);
 
-  const loadData = () => {
-    store.dispatch(getStories());
-    store.dispatch(getPosts());
-  };
+  const POSTS_PER_PAGE = 6;
+
+  useEffect(() => {
+    reloadFeed();
+  }, []);
 
   const reloadFeed = () => {
     setIsRefreshing(true);
@@ -42,23 +47,53 @@ const Home = navigation => {
         },
       ),
     );
+
+    let params = {
+      _page: 1,
+      _limit: POSTS_PER_PAGE,
+    };
+    setPageCount(1);
     store.dispatch(
-      getPosts(
-        onSuccess => {
+      reloadPosts(
+        params,
+        newPosts => {
           setIsFetchingPosts(false);
           setIsRefreshing(isFetchingStories);
         },
-        onFailed => {
+        error => {
           setIsFetchingPosts(false);
           setIsRefreshing(isFetchingStories);
         },
       ),
     );
+
+    setCanLoadMorePosts(true);
   };
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  const loadMorePosts = () => {
+    if (!canLoadMorePosts || isLoadingMorePosts) {
+      return;
+    }
+    setIsLoadingMorePosts(true);
+    let params = {
+      _page: pageCount + 1,
+      _limit: POSTS_PER_PAGE,
+    };
+    setPageCount(pageCount + 1);
+    store.dispatch(
+      getMorePosts(
+        params,
+        newPosts => {
+          setIsLoadingMorePosts(false);
+          setCanLoadMorePosts(newPosts?.length >= POSTS_PER_PAGE);
+        },
+        error => {
+          setIsLoadingMorePosts(false);
+          setCanLoadMorePosts(false);
+        },
+      ),
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,6 +110,10 @@ const Home = navigation => {
             <View style={styles.dividerLine} />
           </View>
         }
+        footerComponent={
+          isLoadingMorePosts && <ActivityIndicator size="large" />
+        }
+        onLoadMore={loadMorePosts}
       />
     </SafeAreaView>
   );

@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {SCREEN_WIDTH} from '../utils/DeviceUtils';
 import ScalableImage from 'react-native-scalable-image';
+import FlatListLoadMore from './FlatListLoadMore';
 
 const MAX_SHORT_DESC_LENGTH_LIMIT = 80;
 
@@ -135,12 +136,15 @@ const FeedPost = ({post}) => {
   );
 };
 
-const HomeFeed = ({posts, refreshControl, headerComponent}) => {
+const HomeFeed = props => {
   const renderItem = ({item}) => <FeedPost post={item} />;
+
+  const {posts, refreshControl, headerComponent, footerComponent, onLoadMore} =
+    props;
 
   return (
     <View style={styles.feedWrapper}>
-      <FlatList
+      <FlatListLoadMore
         data={posts}
         keyExtractor={item => item.id}
         horizontal={false}
@@ -149,6 +153,8 @@ const HomeFeed = ({posts, refreshControl, headerComponent}) => {
         showsVerticalScrollIndicator={false}
         refreshControl={refreshControl}
         ListHeaderComponent={headerComponent ?? null}
+        ListFooterComponent={footerComponent ?? null}
+        onLoadMore={onLoadMore}
       />
     </View>
   );

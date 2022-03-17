@@ -17,19 +17,38 @@ export const loadStoriesFailed = payload => ({
   payload: payload,
 });
 
-export const getPosts = (onSuccess, onFailed) => ({
-  type: ApiActionTypes.GET_POSTS,
+export const reloadPosts = (params, onSuccess, onFailed) => ({
+  type: ApiActionTypes.RELOAD_POSTS,
   payload: null,
+  params: params,
   onSuccess: onSuccess,
   onFailed: onFailed,
 });
 
-export const loadPostsSuccess = payload => ({
-  type: ApiActionTypes.LOAD_POSTS_SUCCESS,
+export const reloadPostsSuccess = payload => ({
+  type: ApiActionTypes.RELOAD_POSTS_SUCCESS,
   payload: payload,
 });
 
-export const loadPostsFailed = payload => ({
-  type: ApiActionTypes.LOAD_POSTS_FAILED,
+export const reloadPostsFailed = payload => ({
+  type: ApiActionTypes.RELOAD_POSTS_FAILED,
+  payload: payload,
+});
+
+export const getMorePosts = (params, onSuccess, onFailed) => ({
+  type: ApiActionTypes.GET_MORE_POSTS,
+  payload: null,
+  params: params,
+  onSuccess: onSuccess,
+  onFailed: onFailed,
+});
+
+export const getMorePostsSuccess = payload => ({
+  type: ApiActionTypes.GET_MORE_POSTS_SUCCESS,
+  payload: payload,
+});
+
+export const getMorePostsFailed = payload => ({
+  type: ApiActionTypes.GET_MORE_POSTS_FAILED,
   payload: payload,
 });
