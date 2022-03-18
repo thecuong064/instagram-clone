@@ -15,6 +15,7 @@ import HomeHeader from '../../components/HomeHeader';
 import HomeStoriesList from '../../components/HomeStoriesList';
 import store from '../../redux/configureStore';
 import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
+import LocalStorageUtils from '../../utils/LocalStorageUtils';
 
 const Home = navigation => {
   const feedRef = useRef(null);
@@ -22,6 +23,8 @@ const Home = navigation => {
 
   const stories = useSelector(state => state.stories.data);
   const posts = useSelector(state => state.posts.data);
+  const [localStories, setLocalStories] = useState([]);
+  const [localPosts, setLocalPosts] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isFetchingStories, setIsFetchingStories] = useState(false);
   const [isFetchingPosts, setIsFetchingPosts] = useState(false);
@@ -41,13 +44,13 @@ const Home = navigation => {
     setIsFetchingPosts(true);
     store.dispatch(
       getStories(
-        onSuccess => {
+        newStories => {
           setIsFetchingStories(false);
           setIsRefreshing(isFetchingPosts);
+          storeStoriesToLocalStorage(newStories);
         },
-        onFailed => {
-          setIsFetchingStories(false);
-          setIsRefreshing(isFetchingPosts);
+        error => {
+          fetchStoriesfromLocalStorage();
         },
       ),
     );
@@ -64,11 +67,10 @@ const Home = navigation => {
           setIsFetchingPosts(false);
           setCanLoadMorePosts(true);
           setIsRefreshing(isFetchingStories);
+          storePostsToLocalStorage(newPosts);
         },
         error => {
-          setIsFetchingPosts(false);
-          setCanLoadMorePosts(true);
-          setIsRefreshing(isFetchingStories);
+          fetchPostsfromLocalStorage();
         },
       ),
     );
@@ -99,19 +101,42 @@ const Home = navigation => {
     );
   };
 
+  const storePostsToLocalStorage = async newPosts => {
+    await LocalStorageUtils.storePosts(newPosts);
+  };
+
+  const fetchPostsfromLocalStorage = async () => {
+    setLocalPosts(await LocalStorageUtils.getPosts());
+    setIsFetchingPosts(false);
+    setCanLoadMorePosts(true);
+    setIsRefreshing(isFetchingStories);
+  };
+
+  const storeStoriesToLocalStorage = async newStories => {
+    await LocalStorageUtils.storeStories(newStories);
+  };
+
+  const fetchStoriesfromLocalStorage = async () => {
+    setLocalStories(await LocalStorageUtils.getStories());
+    setIsFetchingStories(false);
+    setIsRefreshing(isFetchingPosts);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <HomeHeader />
       <View style={styles.dividerLine} />
       <HomeFeed
         ref={feedRef}
-        posts={posts}
+        posts={posts?.length > 0 ? posts : localPosts}
         refreshControl={
           <RefreshControl onRefresh={reloadFeed} refreshing={isRefreshing} />
         }
         headerComponent={
           <View>
-            <HomeStoriesList data={stories} />
+            <HomeStoriesList
+              data={stories?.length > 0 ? stories : localStories}
+            />
             <View style={styles.dividerLine} />
           </View>
         }
