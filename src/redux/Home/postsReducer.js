@@ -19,7 +19,7 @@ const postsReducer = (state = initPosts, action) => {
     }
     case ApiActionTypes.RELOAD_POSTS_FAILED: {
       return {
-        data: [],
+        ...state,
         error: payload,
       };
     }
@@ -31,7 +31,7 @@ const postsReducer = (state = initPosts, action) => {
     }
     case ApiActionTypes.GET_MORE_POSTS_FAILED: {
       return {
-        data: state.data,
+        ...state,
         error: payload,
       };
     }
