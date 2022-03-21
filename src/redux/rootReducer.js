@@ -16,7 +16,7 @@ const storiesPersistConfig = {
 const postsPersistConfig = {
   key: '@redux-persist/posts',
   storage: AsyncStorage,
-  whitelist: ['data'],
+  whitelist: ['initData'],
   stateReconciler: hardSet,
 };
 
