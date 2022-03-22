@@ -10,6 +10,8 @@ import {
   StyleSheet,
   RefreshControl,
   ActivityIndicator,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import HomeFeed from '../../components/HomeFeed';
 import HomeHeader from '../../components/HomeHeader';
@@ -24,15 +26,15 @@ const Home = navigation => {
 
   const stories = useSelector(state => state.stories.data);
   const posts = useSelector(state => state.posts.data);
-  const [localPosts, setLocalPosts] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isFetchingStories, setIsFetchingStories] = useState(false);
   const [isFetchingPosts, setIsFetchingPosts] = useState(false);
   const [isLoadingMorePosts, setIsLoadingMorePosts] = useState(false);
   const [canLoadMorePosts, setCanLoadMorePosts] = useState(true);
+  const [isRefreshFooterVisible, setIsRefreshFooterVisible] = useState(false);
   const [pageCount, setPageCount] = useState(0);
 
-  const POSTS_PER_PAGE = 6;
+  const POSTS_PER_PAGE = 5;
 
   useEffect(() => {
     reloadFeed();
@@ -84,10 +86,20 @@ const Home = navigation => {
           setIsFetchingPosts(false);
           setCanLoadMorePosts(true);
           setIsRefreshing(isFetchingStories);
+          setIsRefreshFooterVisible(true);
           showToast(error.message);
         },
       ),
     );
+  };
+
+  const scrollToTopAndReloadFeed = () => {
+    feedRef.current?.scrollToOffset({
+      offset: 0,
+      animated: true,
+    });
+    setIsRefreshFooterVisible(false);
+    reloadFeed();
   };
 
   const loadMorePosts = () => {
@@ -110,6 +122,7 @@ const Home = navigation => {
         error => {
           setIsLoadingMorePosts(false);
           setCanLoadMorePosts(false);
+          setIsRefreshFooterVisible(true);
         },
       ),
     );
@@ -121,7 +134,7 @@ const Home = navigation => {
       <View style={styles.dividerLine} />
       <HomeFeed
         ref={feedRef}
-        posts={posts?.length > 0 ? posts : localPosts}
+        posts={posts}
         refreshControl={
           <RefreshControl onRefresh={reloadFeed} refreshing={isRefreshing} />
         }
@@ -132,7 +145,20 @@ const Home = navigation => {
           </View>
         }
         footerComponent={
-          isLoadingMorePosts && <ActivityIndicator size="large" />
+          isLoadingMorePosts ? (
+            <ActivityIndicator size="large" />
+          ) : (
+            isRefreshFooterVisible && (
+              <TouchableOpacity
+                style={styles.refreshFooterWrapper}
+                onPress={scrollToTopAndReloadFeed}>
+                <Image
+                  style={styles.refreshFooterButton}
+                  source={require('../../assets/ic_refresh.png')}
+                />
+              </TouchableOpacity>
+            )
+          )
         }
         onLoadMore={loadMorePosts}
       />
@@ -169,6 +195,22 @@ const styles = StyleSheet.create({
   dividerLine: {
     height: 1,
     backgroundColor: '#dadada',
+  },
+  refreshFooterWrapper: {
+    marginBottom: 10,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#b7b7b7',
+  },
+  refreshFooterButton: {
+    width: 20,
+    height: 20,
+    tintColor: '#b7b7b7',
   },
 });
 
