@@ -1,5 +1,6 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import {handleErrorMessage} from '../utils/ErrorHandler';
 import {API_BASE_URL} from './apiUrls';
 
 const axiosClient = axios.create({
@@ -24,8 +25,7 @@ axiosClient.interceptors.response.use(
     return response;
   },
   error => {
-    // handle error
-    throw error;
+    throw handleErrorMessage(error);
   },
 );
 

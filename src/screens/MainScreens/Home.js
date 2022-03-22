@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import Toast from 'react-native-toast-message';
 import {useSelector} from 'react-redux';
 import {useScrollToTop} from '@react-navigation/native';
 
@@ -15,6 +16,7 @@ import HomeHeader from '../../components/HomeHeader';
 import HomeStoriesList from '../../components/HomeStoriesList';
 import store from '../../redux/configureStore';
 import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
+import {ToastTypes} from '../../utils/ToastUtils';
 
 const Home = navigation => {
   const feedRef = useRef(null);
@@ -36,6 +38,17 @@ const Home = navigation => {
     reloadFeed();
   }, []);
 
+  const showToast = message => {
+    Toast.show({
+      position: 'bottom',
+      type: ToastTypes.ERROR,
+      props: {
+        content: message,
+        iconSource: require('../../assets/ic_warning.png'),
+      },
+    });
+  };
+
   const reloadFeed = () => {
     setIsRefreshing(true);
     setIsFetchingStories(true);
@@ -49,6 +62,7 @@ const Home = navigation => {
         error => {
           setIsFetchingStories(false);
           setIsRefreshing(isFetchingPosts);
+          showToast(error.message);
         },
       ),
     );
@@ -70,6 +84,7 @@ const Home = navigation => {
           setIsFetchingPosts(false);
           setCanLoadMorePosts(true);
           setIsRefreshing(isFetchingStories);
+          showToast(error.message);
         },
       ),
     );
