@@ -1,4 +1,6 @@
 import React from 'react';
+import Toast from 'react-native-toast-message';
+import {toastConfig} from './src/utils/ToastUtils';
 import {Provider} from 'react-redux';
 import store, {persistor} from './src/redux/configureStore';
 
@@ -40,6 +42,7 @@ const App = () => {
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
+      <Toast config={toastConfig} />
     </Provider>
   );
 };

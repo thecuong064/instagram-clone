@@ -5551,6 +5551,11 @@ react-native-status-bar-height@^2.6.0:
   resolved "https://registry.yarnpkg.com/react-native-status-bar-height/-/react-native-status-bar-height-2.6.0.tgz#b6afd25b6e3d533c43d0fcdcfd5cafd775592cea"
   integrity sha512-z3SGLF0mHT+OlJDq7B7h/jXPjWcdBT3V14Le5L2PjntjjWM3+EJzq2BcXDwV+v67KFNJic5pgA26cCmseYek6w==
 
+react-native-toast-message@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-2.1.2.tgz#c7fd78252d829e6a69e82320acd6fa878bb0e910"
+  integrity sha512-nLySPAhxovSisRoorpxQxUBchQJjypDit3SCaMmQMOZh3pUH0Q72XRUFingBCq19i849v+A082fdcfqGlkuiFg==
+
 react-native@0.67.2:
   version "0.67.2"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.67.2.tgz#312224bc2271c3cecd374d4bc425619cff4ea5dc"
