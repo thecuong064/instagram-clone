@@ -42,7 +42,7 @@ const App = () => {
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
-      <Toast config={toastConfig} />
+      <Toast config={toastConfig} bottomOffset={60} />
     </Provider>
   );
 };
