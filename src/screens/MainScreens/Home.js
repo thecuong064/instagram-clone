@@ -48,6 +48,7 @@ const Home = navigation => {
         content: message,
         iconSource: require('../../assets/ic_warning.png'),
       },
+      visibilityTime: 800,
     });
   };
 
