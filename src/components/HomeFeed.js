@@ -167,9 +167,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fafafa',
   },
-  feedFlatList: {
-    alignPosts: 'center',
-  },
+  feedFlatList: {},
   feedPostWrapper: {
     marginBottom: 10,
   },

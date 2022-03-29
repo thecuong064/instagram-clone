@@ -12,4 +12,7 @@ export const API_END_POINTS = {
   getPosts: params => {
     return `/posts`;
   },
+  getExplorePhotos: params => {
+    return `/photos`;
+  },
 };
