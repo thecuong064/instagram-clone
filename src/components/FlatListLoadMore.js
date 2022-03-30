@@ -2,7 +2,10 @@ import React, {useState, forwardRef} from 'react';
 import {FlatList} from 'react-native';
 
 const FlatListLoadMore = forwardRef((props, ref) => {
+  const DEFAULT_THRESHOLD = 1.5;
+
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [onEndReached, setOnEndReached] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLoadMore = () => {
@@ -16,9 +19,11 @@ const FlatListLoadMore = forwardRef((props, ref) => {
     <FlatList
       {...props}
       ref={ref}
-      onScroll={() => setHasScrolled(true)}
       onEndReached={handleLoadMore}
-      onEndReachedThreshold={1.5}
+      onEndReachedThreshold={props.onEndReachedThreshold ?? DEFAULT_THRESHOLD}
+      onScrollBeginDrag={() => {
+        setHasScrolled(true);
+      }}
     />
   );
 });
