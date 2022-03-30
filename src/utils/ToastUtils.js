@@ -45,3 +45,17 @@ export const ToastTypes = {
   SUCCESS: 'success',
   ERROR: 'error',
 };
+
+export const ToastUtils = {
+  showErrorToast: ({message, duration = 800}) => {
+    Toast.show({
+      position: 'bottom',
+      type: ToastTypes.ERROR,
+      props: {
+        content: message,
+        iconSource: require('../assets/ic_warning.png'),
+      },
+      visibilityTime: duration,
+    });
+  },
+};
