@@ -18,7 +18,7 @@ import HomeHeader from '../../components/HomeHeader';
 import HomeStoriesList from '../../components/HomeStoriesList';
 import store from '../../redux/configureStore';
 import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
-import {ToastTypes} from '../../utils/ToastUtils';
+import {ToastUtils} from '../../utils/ToastUtils';
 import FooterLoadingIndicator from '../../components/FooterLoadingIndicator';
 
 const Home = navigation => {
@@ -41,18 +41,6 @@ const Home = navigation => {
     reloadFeed();
   }, []);
 
-  const showToast = message => {
-    Toast.show({
-      position: 'bottom',
-      type: ToastTypes.ERROR,
-      props: {
-        content: message,
-        iconSource: require('../../assets/ic_warning.png'),
-      },
-      visibilityTime: 800,
-    });
-  };
-
   const reloadFeed = () => {
     setIsRefreshing(true);
     setIsFetchingStories(true);
@@ -66,7 +54,9 @@ const Home = navigation => {
         error => {
           setIsFetchingStories(false);
           setIsRefreshing(isFetchingPosts);
-          showToast(error.message);
+          ToastUtils.showErrorToast({
+            message: error.message,
+          });
         },
       ),
     );
@@ -89,7 +79,9 @@ const Home = navigation => {
           setCanLoadMorePosts(true);
           setIsRefreshing(isFetchingStories);
           setIsRefreshFooterVisible(true);
-          showToast(error.message);
+          ToastUtils.showErrorToast({
+            message: error.message,
+          });
         },
       ),
     );

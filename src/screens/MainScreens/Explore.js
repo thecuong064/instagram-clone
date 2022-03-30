@@ -17,6 +17,7 @@ import {
   getMoreExplorePhotos,
 } from '../../redux/Explore/actions';
 import FooterLoadingIndicator from '../../components/FooterLoadingIndicator';
+import {ToastUtils} from '../../utils/ToastUtils';
 
 const POSTS_PER_PAGE = 24;
 
@@ -54,6 +55,9 @@ const Explore = navigation => {
         error => {
           setIsRefreshing(false);
           setCanLoadMorePhotos(false);
+          ToastUtils.showErrorToast({
+            message: error.message,
+          });
         },
       ),
     );
@@ -81,6 +85,9 @@ const Explore = navigation => {
         error => {
           setIsLoadingMorePhotos(false);
           setCanLoadMorePhotos(false);
+          ToastUtils.showErrorToast({
+            message: error.message,
+          });
         },
       ),
     );
