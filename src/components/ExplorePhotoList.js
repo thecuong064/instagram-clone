@@ -16,7 +16,7 @@ const photoWidth = (SCREEN_WIDTH - itemSpacing * 2) / itemPerRow;
 const photoHeight = photoWidth;
 
 const ExplorePhotoList = forwardRef((props, ref) => {
-  const {data, onPress, onLoadMore} = props;
+  const {data, onPress, onLoadMore, refreshControl, footerComponent} = props;
 
   const renderItem = ({item}) => {
     return (
@@ -48,6 +48,8 @@ const ExplorePhotoList = forwardRef((props, ref) => {
       }
       ItemSeparatorComponent={ItemSeparator}
       onLoadMore={onLoadMore}
+      refreshControl={refreshControl}
+      ListFooterComponent={footerComponent ?? null}
     />
   );
 });

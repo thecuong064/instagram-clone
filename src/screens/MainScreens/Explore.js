@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useSelector} from 'react-redux';
+import {useScrollToTop} from '@react-navigation/native';
 
 import {
   SafeAreaView,
@@ -7,7 +8,7 @@ import {
   TextInput,
   StyleSheet,
   Image,
-  FlatList,
+  RefreshControl,
 } from 'react-native';
 import ExplorePhotoList from '../../components/ExplorePhotoList';
 import store from '../../redux/configureStore';
@@ -15,10 +16,14 @@ import {
   reloadExplorePhotos,
   getMoreExplorePhotos,
 } from '../../redux/Explore/actions';
+import FooterLoadingIndicator from '../../components/FooterLoadingIndicator';
 
 const POSTS_PER_PAGE = 24;
 
 const Explore = navigation => {
+  const galleryRef = useRef(null);
+  useScrollToTop(galleryRef);
+
   const photos = useSelector(state => state.explorePhotos.data);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoadingMorePhotos, setIsLoadingMorePhotos] = useState(false);
@@ -27,10 +32,10 @@ const Explore = navigation => {
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
-    reloadPhotos();
+    reload();
   }, []);
 
-  const reloadPhotos = () => {
+  const reload = () => {
     setIsRefreshing(true);
 
     let params = {
@@ -81,6 +86,15 @@ const Explore = navigation => {
     );
   };
 
+  const scrollToTopAndReload = () => {
+    galleryRef.current?.scrollToOffset({
+      offset: 0,
+      animated: true,
+    });
+    setIsRefreshFooterVisible(false);
+    reload();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.searchBarWrapper}>
@@ -91,7 +105,21 @@ const Explore = navigation => {
         <TextInput style={styles.searchBarTextInput} placeholder={'Search'} />
       </View>
 
-      <ExplorePhotoList data={photos} onLoadMore={loadMorePhotos} />
+      <ExplorePhotoList
+        ref={galleryRef}
+        data={photos}
+        onLoadMore={loadMorePhotos}
+        refreshControl={
+          <RefreshControl onRefresh={reload} refreshing={isRefreshing} />
+        }
+        footerComponent={
+          <FooterLoadingIndicator
+            isLoadingMore={isLoadingMorePhotos}
+            isRefreshFooterVisible={isRefreshFooterVisible}
+            onRefreshButtonPress={scrollToTopAndReload}
+          />
+        }
+      />
     </SafeAreaView>
   );
 };

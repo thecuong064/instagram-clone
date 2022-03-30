@@ -19,6 +19,7 @@ import HomeStoriesList from '../../components/HomeStoriesList';
 import store from '../../redux/configureStore';
 import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
 import {ToastTypes} from '../../utils/ToastUtils';
+import FooterLoadingIndicator from '../../components/FooterLoadingIndicator';
 
 const Home = navigation => {
   const feedRef = useRef(null);
@@ -146,20 +147,11 @@ const Home = navigation => {
           </View>
         }
         footerComponent={
-          isLoadingMorePosts ? (
-            <ActivityIndicator size="large" />
-          ) : (
-            isRefreshFooterVisible && (
-              <TouchableOpacity
-                style={styles.refreshFooterWrapper}
-                onPress={scrollToTopAndReloadFeed}>
-                <Image
-                  style={styles.refreshFooterButton}
-                  source={require('../../assets/ic_refresh.png')}
-                />
-              </TouchableOpacity>
-            )
-          )
+          <FooterLoadingIndicator
+            isLoadingMore={isLoadingMorePosts}
+            isRefreshFooterVisible={isRefreshFooterVisible}
+            onRefreshButtonPress={scrollToTopAndReloadFeed}
+          />
         }
         onLoadMore={loadMorePosts}
       />

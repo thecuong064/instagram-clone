@@ -15,6 +15,7 @@ const photosReducer = (state = initPhotos, action) => {
     case ApiActionTypes.RELOAD_EXPLORE_PHOTOS_SUCCESS: {
       return {
         ...state,
+        initData: payload,
         data: payload,
       };
     }
