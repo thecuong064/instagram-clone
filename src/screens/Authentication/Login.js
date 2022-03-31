@@ -13,6 +13,7 @@ import {
 import Screens from '../../constants/Screens';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
+import {AuthenticationHelper} from '../../utils/AuthenticationHelper';
 
 const FOOTER_HEIGHT = 50;
 
@@ -38,9 +39,18 @@ const Login = ({navigation}) => {
     checkLoginAllowed(username, newValue);
   };
 
-  const login = () => {
+  const login = async () => {
     Keyboard.dismiss();
-    navigation.navigate(Screens.MAIN);
+
+    try {
+      if (await AuthenticationHelper.login(username, password)) {
+        navigation.navigate(Screens.MAIN);
+        return;
+      }
+      console.log('login error');
+    } catch (error) {
+      console.log('login error: ' + error);
+    }
   };
 
   const gotoRegistration = () => {
@@ -77,7 +87,7 @@ const Login = ({navigation}) => {
               onSubmitEditing={() => ref_password_input.current.focus()}
             />
           </View>
-          <View style={{...styles.textInputWrapper, flexDirection: 'row'}}>
+          <View style={{...styles.textInputWrapper}}>
             <TextInput
               style={{...styles.textInput, marginRight: 40, flexGrow: 1}}
               value={password}
@@ -236,10 +246,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
     borderWidth: 1,
     fontSize: 14,
+    flexDirection: 'row',
   },
   textInput: {
     paddingHorizontal: 10,
     fontSize: 14,
+  },
+  textInputButtonWrapper: {
+    width: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textInputButton: {
+    height: 20,
+    width: 20,
+    tintColor: '#9b9b9b',
   },
   loginButton: {
     height: 50,

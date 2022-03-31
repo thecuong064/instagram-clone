@@ -13,6 +13,7 @@ import {
 import Screens from '../../constants/Screens';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
+import {AuthenticationHelper} from '../../utils/AuthenticationHelper';
 
 const FOOTER_HEIGHT = 50;
 
@@ -24,37 +25,67 @@ const Registration = ({navigation}) => {
 
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
   const [isClearEmailVisible, setIsClearEmailVisible] = useState(false);
   const [isClearPhoneVisible, setIsClearPhoneVisible] = useState(false);
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [isSignupAllowed, setIsSignupAllowed] = useState(false);
   const [selectedTab, setSelectedTab] = useState(tabs.EMAIL);
+
+  const ref_password_input = useRef();
 
   const checkSignupAllowed = (
     newEmail = '',
     newPhoneNumber = '',
+    newPassword,
     newSelectedTab = tabs.EMAIL,
   ) => {
     setIsSignupAllowed(
-      (newEmail.length > 0 && newSelectedTab === tabs.EMAIL) ||
-        (newPhoneNumber.length > 0 && newSelectedTab === tabs.PHONE),
+      ((newEmail.length > 0 && newSelectedTab === tabs.EMAIL) ||
+        (newPhoneNumber.length > 0 && newSelectedTab === tabs.PHONE)) &&
+        newPassword?.length >= 6,
     );
   };
 
   const onEmailChanged = newValue => {
     setEmail(newValue);
-    checkSignupAllowed(newValue, '', selectedTab);
+    checkSignupAllowed(newValue, '', password, selectedTab);
     setIsClearEmailVisible(newValue.length > 0);
   };
 
   const onPhoneNumberChanged = newValue => {
     setPhoneNumber(newValue);
-    checkSignupAllowed('', newValue, selectedTab);
+    checkSignupAllowed('', newValue, password, selectedTab);
     setIsClearPhoneVisible(newValue.length > 0);
   };
 
-  const signUp = () => {
+  const onPasswordChanged = newValue => {
+    setPassword(newValue);
+    checkSignupAllowed(email, phoneNumber, newValue, selectedTab);
+  };
+
+  const signUp = async () => {
     Keyboard.dismiss();
-    navigation.navigate(Screens.MAIN);
+
+    try {
+      let username = getUsername();
+      if (await AuthenticationHelper.signup(username, password)) {
+        navigation.navigate(Screens.MAIN);
+        return;
+      }
+      console.log('signUp error');
+    } catch (error) {
+      console.log('signUp error: ' + error);
+    }
+  };
+
+  const getUsername = () => {
+    switch (selectedTab) {
+      case tabs.EMAIL:
+        return email;
+      case tabs.PHONE:
+        return phoneNumber;
+    }
   };
 
   const goBack = () => {
@@ -145,6 +176,8 @@ const Registration = ({navigation}) => {
                 value={email}
                 onChangeText={newVal => onEmailChanged(newVal)}
                 placeholder="Email"
+                returnKeyType="next"
+                onSubmitEditing={() => ref_password_input.current.focus()}
               />
               {isClearEmailVisible && (
                 <TouchableOpacity
@@ -166,6 +199,8 @@ const Registration = ({navigation}) => {
                 value={phoneNumber}
                 onChangeText={newVal => onPhoneNumberChanged(newVal)}
                 placeholder="Phone number"
+                returnKeyType="next"
+                onSubmitEditing={() => ref_password_input.current.focus()}
               />
               {isClearPhoneVisible && (
                 <TouchableOpacity
@@ -180,6 +215,32 @@ const Registration = ({navigation}) => {
               )}
             </View>
           )}
+          <View style={{...styles.textInputWrapper}}>
+            <TextInput
+              style={{...styles.textInput, marginRight: 40, flexGrow: 1}}
+              value={password}
+              secureTextEntry={isPasswordHidden}
+              onChangeText={newVal => onPasswordChanged(newVal)}
+              placeholder="Password"
+              ref={ref_password_input}
+            />
+            <TouchableOpacity
+              onPress={() => setIsPasswordHidden(!isPasswordHidden)}
+              style={styles.textInputButtonWrapper}
+              activeOpacity={0.8}>
+              <Image
+                style={{
+                  ...styles.textInputButton,
+                  tintColor: isPasswordHidden ? '#9b9b9b' : '#0095f4',
+                }}
+                source={
+                  isPasswordHidden
+                    ? require('../../assets/ic_eye_hidden.png')
+                    : require('../../assets/ic_eye_visible.png')
+                }
+              />
+            </TouchableOpacity>
+          </View>
 
           <TouchableOpacity
             onPress={signUp}
