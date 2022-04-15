@@ -14,6 +14,7 @@ import Screens from '../../navigators/Screens';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 import {AuthenticationHelper} from '../../utils/AuthenticationHelper';
+import {LocalResources} from '../../constants/LocalResources';
 
 const FOOTER_HEIGHT = 50;
 
@@ -73,7 +74,7 @@ const Login = ({navigation}) => {
         }}>
         <Image
           style={styles.instagramText}
-          source={require('../../assets/instagram_text.png')}
+          source={LocalResources.Images.instagram_text}
         />
         <View style={styles.loginForm}>
           <View style={{...styles.textInputWrapper, marginTop: 0}}>
@@ -107,8 +108,8 @@ const Login = ({navigation}) => {
               <Image
                 source={
                   isPasswordHidden
-                    ? require('../../assets/ic_eye_hidden.png')
-                    : require('../../assets/ic_eye_visible.png')
+                    ? LocalResources.Icons.ic_eye_hidden
+                    : LocalResources.Icons.ic_eye_visible
                 }
                 style={{
                   height: 20,
@@ -184,7 +185,7 @@ const Login = ({navigation}) => {
                 marginRight: 10,
                 resizeMode: 'contain',
               }}
-              source={require('../../assets/logo_fb_rounded.png')}
+              source={LocalResources.Images.logo_fb_rounded}
             />
             <Text style={styles.loginFbButtonText}>Log in with Facebook</Text>
           </TouchableOpacity>

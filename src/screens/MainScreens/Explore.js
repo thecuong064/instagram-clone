@@ -18,6 +18,7 @@ import {
 } from '../../redux/Explore/actions';
 import FooterLoadingIndicator from '../../components/FooterLoadingIndicator';
 import {ToastUtils} from '../../utils/ToastUtils';
+import {LocalResources} from '../../constants/LocalResources';
 
 const POSTS_PER_PAGE = 24;
 
@@ -107,7 +108,7 @@ const Explore = navigation => {
       <View style={styles.searchBarWrapper}>
         <Image
           style={styles.searchBarIcon}
-          source={require('../../assets/ic_search.png')}
+          source={LocalResources.Icons.ic_search}
         />
         <TextInput style={styles.searchBarTextInput} placeholder={'Search'} />
       </View>

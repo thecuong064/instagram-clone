@@ -6,6 +6,7 @@ import Home from '../screens/MainScreens/Home';
 import Explore from '../screens/MainScreens/Explore';
 import Favorite from '../screens/MainScreens/Favorite';
 import Profile from '../screens/MainScreens/Profile';
+import {LocalResources} from '../constants/LocalResources';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,8 +45,8 @@ const MainBottomTab = navigation => {
         options={{
           tabBarIcon: ({focused}) => (
             <TabIcon
-              focusedIconSrc={require('../assets/tab_icons/ic_tab_home_selected.png')}
-              defaultIconSrc={require('../assets/tab_icons/ic_tab_home.png')}
+              focusedIconSrc={LocalResources.TabIcons.ic_tab_home_selected}
+              defaultIconSrc={LocalResources.TabIcons.ic_tab_home}
               focused={focused}
               title="Home"
             />
@@ -58,8 +59,8 @@ const MainBottomTab = navigation => {
         options={{
           tabBarIcon: ({focused}) => (
             <TabIcon
-              focusedIconSrc={require('../assets/tab_icons/ic_tab_explore_selected.png')}
-              defaultIconSrc={require('../assets/tab_icons/ic_tab_explore.png')}
+              focusedIconSrc={LocalResources.TabIcons.ic_tab_explore_selected}
+              defaultIconSrc={LocalResources.TabIcons.ic_tab_explore}
               focused={focused}
               title="Explore"
             />
@@ -72,8 +73,8 @@ const MainBottomTab = navigation => {
         options={{
           tabBarIcon: ({focused}) => (
             <TabIcon
-              focusedIconSrc={require('../assets/tab_icons/ic_tab_add.png')}
-              defaultIconSrc={require('../assets/tab_icons/ic_tab_add.png')}
+              focusedIconSrc={LocalResources.TabIcons.ic_tab_add}
+              defaultIconSrc={LocalResources.TabIcons.ic_tab_add}
               focused={focused}
               title="Add"
             />
@@ -86,8 +87,8 @@ const MainBottomTab = navigation => {
         options={{
           tabBarIcon: ({focused}) => (
             <TabIcon
-              focusedIconSrc={require('../assets/tab_icons/ic_tab_fav_selected.png')}
-              defaultIconSrc={require('../assets/tab_icons/ic_tab_fav.png')}
+              focusedIconSrc={LocalResources.TabIcons.ic_tab_fav_selected}
+              defaultIconSrc={LocalResources.TabIcons.ic_tab_fav}
               focused={focused}
               title="Favorite"
             />
@@ -100,8 +101,8 @@ const MainBottomTab = navigation => {
         options={{
           tabBarIcon: ({focused}) => (
             <TabIcon
-              focusedIconSrc={require('../assets/tab_icons/ic_tab_profile_selected.png')}
-              defaultIconSrc={require('../assets/tab_icons/ic_tab_profile.png')}
+              focusedIconSrc={LocalResources.TabIcons.ic_tab_profile_selected}
+              defaultIconSrc={LocalResources.TabIcons.ic_tab_profile}
               focused={focused}
               title="Favorite"
             />

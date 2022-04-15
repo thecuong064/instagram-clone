@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
+import {LocalResources} from '../constants/LocalResources';
 
 const FooterLoadingIndicator = props => {
   const {isLoadingMore, isRefreshFooterVisible, onRefreshButtonPress} = props;
@@ -18,7 +19,7 @@ const FooterLoadingIndicator = props => {
         onPress={onRefreshButtonPress}>
         <Image
           style={styles.refreshFooterButton}
-          source={require('../assets/ic_refresh.png')}
+          source={LocalResources.Icons.ic_refresh}
         />
       </TouchableOpacity>
     )

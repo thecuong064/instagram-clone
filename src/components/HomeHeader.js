@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {LocalResources} from '../constants/LocalResources';
 
 const HomeHeader = () => {
   return (
@@ -8,12 +9,12 @@ const HomeHeader = () => {
       <Image
         style={styles.headerInsText}
         resizeMode={'contain'}
-        source={require('../assets/instagram_text.png')}
+        source={LocalResources.Images.instagram_text}
       />
       <TouchableOpacity style={styles.headerMsgButtonWrapper}>
         <Image
           style={styles.headerMsgButtonImg}
-          source={require('../assets/ic_message.png')}
+          source={LocalResources.Icons.ic_message}
         />
       </TouchableOpacity>
     </View>

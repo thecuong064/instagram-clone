@@ -1,6 +1,7 @@
 import React from 'react';
 import Toast, {BaseToast, ErrorToast} from 'react-native-toast-message';
 import {View, Text, Image} from 'react-native';
+import {LocalResources} from '../constants/LocalResources';
 
 export const toastConfig = {
   success: props => (
@@ -53,7 +54,7 @@ export const ToastUtils = {
       type: ToastTypes.ERROR,
       props: {
         content: message,
-        iconSource: require('../assets/ic_warning.png'),
+        iconSource: LocalResources.Icons.ic_warning,
       },
       visibilityTime: duration,
     });

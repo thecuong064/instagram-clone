@@ -14,6 +14,7 @@ import Screens from '../../navigators/Screens';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 import {AuthenticationHelper} from '../../utils/AuthenticationHelper';
+import {LocalResources} from '../../constants/LocalResources';
 
 const FOOTER_HEIGHT = 50;
 
@@ -126,7 +127,7 @@ const Registration = ({navigation}) => {
         keyboardShouldPersistTaps={'handled'}>
         <Image
           style={styles.iconUser}
-          source={require('../../assets/ic_signup_user.png')}
+          source={LocalResources.Icons.ic_signup_user}
         />
         <View style={styles.signUpForm}>
           <View style={styles.tabBarWrapper}>
@@ -185,7 +186,7 @@ const Registration = ({navigation}) => {
                   style={styles.textInputButtonWrapper}
                   activeOpacity={0.8}>
                   <Image
-                    source={require('../../assets/ic_clear_text_input.png')}
+                    source={LocalResources.Icons.ic_clear_text_input}
                     style={styles.textInputButton}
                   />
                 </TouchableOpacity>
@@ -208,7 +209,7 @@ const Registration = ({navigation}) => {
                   style={styles.textInputButtonWrapper}
                   activeOpacity={0.8}>
                   <Image
-                    source={require('../../assets/ic_clear_text_input.png')}
+                    source={LocalResources.Icons.ic_clear_text_input}
                     style={styles.textInputButton}
                   />
                 </TouchableOpacity>
@@ -235,8 +236,8 @@ const Registration = ({navigation}) => {
                 }}
                 source={
                   isPasswordHidden
-                    ? require('../../assets/ic_eye_hidden.png')
-                    : require('../../assets/ic_eye_visible.png')
+                    ? LocalResources.Icons.ic_eye_hidden
+                    : LocalResources.Icons.ic_eye_visible
                 }
               />
             </TouchableOpacity>

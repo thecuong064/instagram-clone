@@ -12,6 +12,7 @@ import {
 import {SCREEN_WIDTH} from '../utils/DeviceUtils';
 import ScalableImage from 'react-native-scalable-image';
 import FlatListLoadMore from './FlatListLoadMore';
+import {LocalResources} from '../constants/LocalResources';
 
 const MAX_SHORT_DESC_LENGTH_LIMIT = 80;
 
@@ -43,7 +44,7 @@ const FeedPost = ({post}) => {
               height: 20,
               width: 20,
             }}
-            source={require('../assets/ic_post_more.png')}
+            source={LocalResources.Icons.ic_post_more}
           />
         </TouchableOpacity>
       </View>
@@ -62,21 +63,21 @@ const FeedPost = ({post}) => {
             style={styles.feedPostButton}
             source={
               isLiked
-                ? require('../assets/ic_post_like_selected.png')
-                : require('../assets/ic_post_like.png')
+                ? LocalResources.Icons.ic_post_like_selected
+                : LocalResources.Icons.ic_post_like
             }
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.feedPostButtonWrapper}>
           <Image
             style={styles.feedPostButton}
-            source={require('../assets/ic_post_comment.png')}
+            source={LocalResources.Icons.ic_post_comment}
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.feedPostButtonWrapper}>
           <Image
             style={styles.feedPostButton}
-            source={require('../assets/ic_post_direct.png')}
+            source={LocalResources.Icons.ic_post_direct}
           />
         </TouchableOpacity>
         <TouchableOpacity
@@ -90,8 +91,8 @@ const FeedPost = ({post}) => {
             style={styles.feedPostButton}
             source={
               isSaved
-                ? require('../assets/ic_post_save_selected.png')
-                : require('../assets/ic_post_save.png')
+                ? LocalResources.Icons.ic_post_save_selected
+                : LocalResources.Icons.ic_post_save
             }
           />
         </TouchableOpacity>
