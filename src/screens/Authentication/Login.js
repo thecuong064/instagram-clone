@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-import Screens from '../../constants/Screens';
+import Screens from '../../navigators/Screens';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 import {AuthenticationHelper} from '../../utils/AuthenticationHelper';
