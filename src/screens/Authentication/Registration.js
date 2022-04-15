@@ -218,7 +218,7 @@ const Registration = ({navigation}) => {
           )}
           <View style={{...styles.textInputWrapper}}>
             <TextInput
-              style={{...styles.textInput, marginRight: 40, flexGrow: 1}}
+              style={{...styles.textInput}}
               value={password}
               secureTextEntry={isPasswordHidden}
               onChangeText={newVal => onPasswordChanged(newVal)}
@@ -318,8 +318,7 @@ const styles = StyleSheet.create({
   textInput: {
     paddingHorizontal: 10,
     fontSize: 14,
-    marginRight: 40,
-    flexGrow: 1,
+    flex: 1,
   },
   textInputButtonWrapper: {
     width: 40,
