@@ -13,13 +13,13 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import HomeFeed from '../../components/HomeFeed';
-import HomeHeader from '../../components/HomeHeader';
-import HomeStoriesList from '../../components/HomeStoriesList';
+import HomeFeed from '../../components/home/HomeFeed';
+import HomeHeader from '../../components/home/HomeHeader';
+import HomeStoriesList from '../../components/home/HomeStoriesList';
 import store from '../../redux/configureStore';
 import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
 import {ToastUtils} from '../../utils/ToastUtils';
-import FooterLoadingIndicator from '../../components/FooterLoadingIndicator';
+import FooterLoadingIndicator from '../../components//general/FooterLoadingIndicator';
 
 const Home = navigation => {
   const feedRef = useRef(null);

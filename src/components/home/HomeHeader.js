@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {LocalResources} from '../constants/LocalResources';
+import {LocalResources} from '../../constants/LocalResources';
 
 const HomeHeader = () => {
   return (

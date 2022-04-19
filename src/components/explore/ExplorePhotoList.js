@@ -6,9 +6,9 @@ import {
   StyleSheet,
   FlatList,
 } from 'react-native';
-import {SCREEN_WIDTH} from '../utils/DeviceUtils';
+import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 import ExplorePhoto from './ExplorePhoto';
-import FlatListLoadMore from './FlatListLoadMore';
+import FlatListLoadMore from '../general/FlatListLoadMore';
 
 const itemSpacing = 2;
 const itemPerRow = 3;

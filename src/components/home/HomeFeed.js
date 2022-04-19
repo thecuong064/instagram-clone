@@ -9,10 +9,10 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import {SCREEN_WIDTH} from '../utils/DeviceUtils';
+import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 import ScalableImage from 'react-native-scalable-image';
-import FlatListLoadMore from './FlatListLoadMore';
-import {LocalResources} from '../constants/LocalResources';
+import FlatListLoadMore from '../general/FlatListLoadMore';
+import {LocalResources} from '../../constants/LocalResources';
 
 const MAX_SHORT_DESC_LENGTH_LIMIT = 80;
 

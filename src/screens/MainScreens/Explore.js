@@ -10,13 +10,13 @@ import {
   Image,
   RefreshControl,
 } from 'react-native';
-import ExplorePhotoList from '../../components/ExplorePhotoList';
+import ExplorePhotoList from '../../components/explore/ExplorePhotoList';
 import store from '../../redux/configureStore';
 import {
   reloadExplorePhotos,
   getMoreExplorePhotos,
 } from '../../redux/Explore/actions';
-import FooterLoadingIndicator from '../../components/FooterLoadingIndicator';
+import FooterLoadingIndicator from '../../components/general/FooterLoadingIndicator';
 import {ToastUtils} from '../../utils/ToastUtils';
 import {LocalResources} from '../../constants/LocalResources';
 

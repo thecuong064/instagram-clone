@@ -5,7 +5,7 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
-import {LocalResources} from '../constants/LocalResources';
+import {LocalResources} from '../../constants/LocalResources';
 
 const FooterLoadingIndicator = props => {
   const {isLoadingMore, isRefreshFooterVisible, onRefreshButtonPress} = props;
