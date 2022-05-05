@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import {SafeAreaView, View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/MainScreens/Home';
 import Explore from '../screens/MainScreens/Explore';
@@ -31,7 +31,29 @@ const TabIcon = props => {
   );
 };
 
+const Modals = {
+  None: 'None',
+  SourceOptions: 'SourceOptions',
+};
+
+const NullView = () => {
+  return null;
+};
+
 const MainBottomTab = navigation => {
+  const [visibleModal, setVisibleModal] = useState(Modals.None);
+
+  const showModal = modal => {
+    if (!Object.values(Modals).includes(modal)) {
+      return;
+    }
+    setVisibleModal(modal);
+  };
+
+  const dismissModals = () => {
+    setVisibleModal(Modals.None);
+  };
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -69,7 +91,7 @@ const MainBottomTab = navigation => {
       />
       <Tab.Screen
         name="Add"
-        component={Home}
+        component={NullView}
         options={{
           tabBarIcon: ({focused}) => (
             <TabIcon
@@ -80,6 +102,12 @@ const MainBottomTab = navigation => {
             />
           ),
         }}
+        listeners={({navigation}) => ({
+          tabPress: e => {
+            e.preventDefault();
+            navigation.navigate('UploadingOptionsModal');
+          },
+        })}
       />
       <Tab.Screen
         name="Favorite"
