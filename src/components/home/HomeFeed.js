@@ -1,22 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, forwardRef} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import React, {useState, useRef, forwardRef} from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 import ScalableImage from 'react-native-scalable-image';
 import FlatListLoadMore from '../general/FlatListLoadMore';
 import {LocalResources} from '../../constants/LocalResources';
+import {MoreBottomSheet} from './MoreBottomSheet';
 
 const MAX_SHORT_DESC_LENGTH_LIMIT = 80;
 
-const FeedPost = ({post}) => {
+const FeedPost = ({post, onMorePress}) => {
   const {id, username, userPhoto, photo} = post;
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -38,7 +31,8 @@ const FeedPost = ({post}) => {
             position: 'absolute',
             right: 0,
             marginRight: 10,
-          }}>
+          }}
+          onPress={onMorePress}>
           <Image
             style={{
               height: 20,
@@ -138,10 +132,18 @@ const FeedPost = ({post}) => {
 };
 
 const HomeFeed = forwardRef((props, ref) => {
-  const renderItem = ({item}) => <FeedPost post={item} />;
+  const renderItem = ({item}) => (
+    <FeedPost post={item} onMorePress={showMoreSheet} />
+  );
 
   const {posts, refreshControl, headerComponent, footerComponent, onLoadMore} =
     props;
+
+  const moreSheetRef = useRef(null);
+
+  const showMoreSheet = () => {
+    moreSheetRef.current.present();
+  };
 
   return (
     <View style={styles.feedWrapper}>
@@ -158,6 +160,7 @@ const HomeFeed = forwardRef((props, ref) => {
         ListFooterComponent={footerComponent ?? null}
         onLoadMore={onLoadMore}
       />
+      <MoreBottomSheet ref={moreSheetRef} />
     </View>
   );
 });

@@ -40,7 +40,7 @@ const NullView = () => {
   return null;
 };
 
-const MainBottomTab = navigation => {
+const MainBottomTab = ({navigation, route}) => {
   const [visibleModal, setVisibleModal] = useState(Modals.None);
 
   const showModal = modal => {

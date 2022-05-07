@@ -21,7 +21,7 @@ import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
 import {ToastUtils} from '../../utils/ToastUtils';
 import FooterLoadingIndicator from '../../components//general/FooterLoadingIndicator';
 
-const Home = navigation => {
+const Home = ({navigation, route}) => {
   const feedRef = useRef(null);
   useScrollToTop(feedRef);
 
