@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {LocalResources} from '../../constants/LocalResources';
 
-const FooterLoadingIndicator = props => {
+export const FooterLoadingIndicator = props => {
   const {isLoadingMore, isRefreshFooterVisible, onRefreshButtonPress} = props;
 
   return isLoadingMore ? (
@@ -44,5 +44,3 @@ const styles = StyleSheet.create({
     tintColor: '#b7b7b7',
   },
 });
-
-export default FooterLoadingIndicator;

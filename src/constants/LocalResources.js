@@ -26,6 +26,13 @@ export const LocalResources = {
     ic_search: require('../assets/ic_search.png'),
     ic_signup_user: require('../assets/ic_signup_user.png'),
     ic_warning: require('../assets/ic_warning.png'),
+    ic_grid: require('../assets/ic_grid.png'),
+    ic_story_add: require('../assets/ic_story_add.png'),
+    ic_reel: require('../assets/ic_reel.png'),
+    ic_live: require('../assets/ic_live.png'),
+    ic_share: require('../assets/ic_share.png'),
+    ic_link: require('../assets/ic_link.png'),
+    ic_report: require('../assets/ic_report.png'),
   },
   Images: {
     instagram_text: require('../assets/instagram_text.png'),
