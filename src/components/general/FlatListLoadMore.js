@@ -1,7 +1,7 @@
 import React, {useState, forwardRef} from 'react';
 import {FlatList} from 'react-native';
 
-const FlatListLoadMore = forwardRef((props, ref) => {
+export const FlatListLoadMore = forwardRef((props, ref) => {
   const DEFAULT_THRESHOLD = 1.5;
 
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -27,5 +27,3 @@ const FlatListLoadMore = forwardRef((props, ref) => {
     />
   );
 });
-
-export default FlatListLoadMore;

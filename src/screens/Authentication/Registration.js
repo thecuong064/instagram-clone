@@ -18,7 +18,7 @@ import {LocalResources} from '../../constants/LocalResources';
 
 const FOOTER_HEIGHT = 50;
 
-const Registration = ({navigation}) => {
+export const Registration = ({navigation}) => {
   const tabs = {
     PHONE: 1,
     EMAIL: 2,
@@ -387,5 +387,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default Registration;

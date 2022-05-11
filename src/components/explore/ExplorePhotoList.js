@@ -1,21 +1,15 @@
 import React, {forwardRef} from 'react';
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
-import ExplorePhoto from './ExplorePhoto';
-import FlatListLoadMore from '../general/FlatListLoadMore';
+import {FlatListLoadMore} from '../general';
+import {ExplorePhoto} from './ExplorePhoto';
 
 const itemSpacing = 2;
 const itemPerRow = 3;
 const photoWidth = (SCREEN_WIDTH - itemSpacing * 2) / itemPerRow;
 const photoHeight = photoWidth;
 
-const ExplorePhotoList = forwardRef((props, ref) => {
+export const ExplorePhotoList = forwardRef((props, ref) => {
   const {data, onPress, onLoadMore, refreshControl, footerComponent} = props;
 
   const renderItem = ({item}) => {
@@ -62,5 +56,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
-
-export default ExplorePhotoList;

@@ -1,27 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Toast from 'react-native-toast-message';
 import {useSelector} from 'react-redux';
 import {useScrollToTop} from '@react-navigation/native';
 
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  RefreshControl,
-  ActivityIndicator,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import HomeFeed from '../../components/home/HomeFeed';
-import HomeHeader from '../../components/home/HomeHeader';
-import HomeStoriesList from '../../components/home/HomeStoriesList';
+import {SafeAreaView, View, StyleSheet, RefreshControl} from 'react-native';
+import {HomeFeed, HomeHeader, HomeStoriesList} from '../../components/home';
 import store from '../../redux/configureStore';
 import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
 import {ToastUtils} from '../../utils/ToastUtils';
-import FooterLoadingIndicator from '../../components//general/FooterLoadingIndicator';
+import {FooterLoadingIndicator} from '../../components/general';
 
-const Home = ({navigation, route}) => {
+export const Home = ({navigation, route}) => {
   const feedRef = useRef(null);
   useScrollToTop(feedRef);
 
@@ -198,5 +186,3 @@ const styles = StyleSheet.create({
     tintColor: '#b7b7b7',
   },
 });
-
-export default Home;

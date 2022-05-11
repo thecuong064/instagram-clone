@@ -2,7 +2,7 @@ import React from 'react';
 
 import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
 
-const Favorite = navigation => {
+export const Favorite = navigation => {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Favorite Page</Text>
@@ -16,5 +16,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default Favorite;

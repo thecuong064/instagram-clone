@@ -2,10 +2,7 @@ import React, {useState} from 'react';
 
 import {View, Image, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '../screens/MainScreens/Home';
-import Explore from '../screens/MainScreens/Explore';
-import Favorite from '../screens/MainScreens/Favorite';
-import Profile from '../screens/MainScreens/Profile';
+import {Home, Explore, Favorite, Profile} from '../screens/MainScreens';
 import {LocalResources} from '../constants/LocalResources';
 
 const Tab = createBottomTabNavigator();

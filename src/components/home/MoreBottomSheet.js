@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {LocalResources} from '../../../constants/LocalResources';
+import {LocalResources} from '../../constants/LocalResources';
 import {BottomSheetBackdrop, BottomSheetModal} from '@gorhom/bottom-sheet';
 
 export const MoreBottomSheet = forwardRef((props, sheetRef) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, TouchableOpacity, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-const ExplorePhoto = props => {
+export const ExplorePhoto = props => {
   const {photo, onPress, width, height} = props;
   return (
     <TouchableOpacity
@@ -23,5 +23,3 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
 });
-
-export default ExplorePhoto;

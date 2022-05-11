@@ -18,7 +18,7 @@ import {LocalResources} from '../../constants/LocalResources';
 
 const FOOTER_HEIGHT = 50;
 
-const Login = ({navigation}) => {
+export const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
@@ -309,5 +309,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#dadada',
   },
 });
-
-export default Login;

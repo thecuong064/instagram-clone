@@ -3,7 +3,7 @@ import React from 'react';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {LocalResources} from '../../constants/LocalResources';
 
-const HomeHeader = () => {
+export const HomeHeader = () => {
   return (
     <View style={styles.header}>
       <Image
@@ -43,5 +43,3 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 });
-
-export default HomeHeader;

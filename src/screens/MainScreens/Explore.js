@@ -10,19 +10,19 @@ import {
   Image,
   RefreshControl,
 } from 'react-native';
-import ExplorePhotoList from '../../components/explore/ExplorePhotoList';
+import {ExplorePhotoList} from '../../components/explore';
 import store from '../../redux/configureStore';
 import {
   reloadExplorePhotos,
   getMoreExplorePhotos,
 } from '../../redux/Explore/actions';
-import FooterLoadingIndicator from '../../components/general/FooterLoadingIndicator';
+import {FooterLoadingIndicator} from '../../components/general';
 import {ToastUtils} from '../../utils/ToastUtils';
 import {LocalResources} from '../../constants/LocalResources';
 
 const POSTS_PER_PAGE = 24;
 
-const Explore = navigation => {
+export const Explore = navigation => {
   const galleryRef = useRef(null);
   useScrollToTop(galleryRef);
 
@@ -157,5 +157,3 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
 });
-
-export default Explore;

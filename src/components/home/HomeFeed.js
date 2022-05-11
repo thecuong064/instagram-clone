@@ -3,7 +3,7 @@ import React, {useState, useRef, forwardRef} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {SCREEN_WIDTH} from '../../utils/DeviceUtils';
 import ScalableImage from 'react-native-scalable-image';
-import FlatListLoadMore from '../general/FlatListLoadMore';
+import {FlatListLoadMore} from '../general';
 import {LocalResources} from '../../constants/LocalResources';
 import {MoreBottomSheet} from './MoreBottomSheet';
 
@@ -131,7 +131,7 @@ const FeedPost = ({post, onMorePress}) => {
   );
 };
 
-const HomeFeed = forwardRef((props, ref) => {
+export const HomeFeed = forwardRef((props, ref) => {
   const renderItem = ({item}) => (
     <FeedPost post={item} onMorePress={showMoreSheet} />
   );
@@ -223,5 +223,3 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
 });
-
-export default HomeFeed;

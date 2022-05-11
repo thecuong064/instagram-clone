@@ -27,7 +27,7 @@ const StoryItem = ({story}) => {
   );
 };
 
-const HomeStoriesList = ({data}) => {
+export const HomeStoriesList = ({data}) => {
   const renderItem = ({item}) => <StoryItem story={item} />;
 
   return (
@@ -76,5 +76,3 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
-
-export default HomeStoriesList;
