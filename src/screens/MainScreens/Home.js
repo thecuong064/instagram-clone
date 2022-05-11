@@ -8,6 +8,7 @@ import store from '../../redux/configureStore';
 import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
 import {ToastUtils} from '../../utils/ToastUtils';
 import {FooterLoadingIndicator} from '../../components/general';
+import {ComingSoonModal} from '../../modals';
 
 export const Home = ({navigation, route}) => {
   const feedRef = useRef(null);
@@ -22,6 +23,8 @@ export const Home = ({navigation, route}) => {
   const [canLoadMorePosts, setCanLoadMorePosts] = useState(true);
   const [isRefreshFooterVisible, setIsRefreshFooterVisible] = useState(false);
   const [pageCount, setPageCount] = useState(0);
+  const [isCommingSoonModalVisible, setIsCommingSoonModalVisible] =
+    useState(false);
 
   const POSTS_PER_PAGE = 5;
 
@@ -112,7 +115,9 @@ export const Home = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HomeHeader />
+      <HomeHeader
+        onMessengerButtonPress={() => setIsCommingSoonModalVisible(true)}
+      />
       <View style={styles.dividerLine} />
       <HomeFeed
         ref={feedRef}
@@ -134,6 +139,10 @@ export const Home = ({navigation, route}) => {
           />
         }
         onLoadMore={loadMorePosts}
+      />
+      <ComingSoonModal
+        isVisible={isCommingSoonModalVisible}
+        setIsVisble={setIsCommingSoonModalVisible}
       />
     </SafeAreaView>
   );

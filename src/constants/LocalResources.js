@@ -37,6 +37,7 @@ export const LocalResources = {
   Images: {
     instagram_text: require('../assets/instagram_text.png'),
     logo_fb_rounded: require('../assets/logo_fb_rounded.png'),
+    banner_coming_soon: require('../assets/images/banner_coming_soon.png'),
   },
   Fonts: {},
 };
