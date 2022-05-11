@@ -79,6 +79,8 @@ export const Login = ({navigation}) => {
         <View style={styles.loginForm}>
           <View style={{...styles.textInputWrapper, marginTop: 0}}>
             <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
               style={{...styles.textInput, marginTop: 0}}
               value={username}
               onChangeText={newVal => onUsernameChanged(newVal)}
@@ -90,6 +92,8 @@ export const Login = ({navigation}) => {
           </View>
           <View style={{...styles.textInputWrapper}}>
             <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
               style={{...styles.textInput, marginRight: 0}}
               value={password}
               secureTextEntry={isPasswordHidden}

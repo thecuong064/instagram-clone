@@ -110,7 +110,12 @@ export const Explore = navigation => {
           style={styles.searchBarIcon}
           source={LocalResources.Icons.ic_search}
         />
-        <TextInput style={styles.searchBarTextInput} placeholder={'Search'} />
+        <TextInput
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={styles.searchBarTextInput}
+          placeholder={'Search'}
+        />
       </View>
 
       <ExplorePhotoList
@@ -149,6 +154,7 @@ const styles = StyleSheet.create({
   },
   searchBarTextInput: {
     fontSize: 16,
+    flex: 1,
   },
   searchBarIcon: {
     width: 18,

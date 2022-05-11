@@ -173,6 +173,8 @@ export const Registration = ({navigation}) => {
           {selectedTab === tabs.EMAIL && (
             <View style={styles.textInputWrapper}>
               <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
                 style={styles.textInput}
                 value={email}
                 onChangeText={newVal => onEmailChanged(newVal)}
@@ -196,6 +198,8 @@ export const Registration = ({navigation}) => {
           {selectedTab === tabs.PHONE && (
             <View style={styles.textInputWrapper}>
               <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
                 style={styles.textInput}
                 value={phoneNumber}
                 onChangeText={newVal => onPhoneNumberChanged(newVal)}
@@ -218,6 +222,8 @@ export const Registration = ({navigation}) => {
           )}
           <View style={{...styles.textInputWrapper}}>
             <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
               style={{...styles.textInput}}
               value={password}
               secureTextEntry={isPasswordHidden}
