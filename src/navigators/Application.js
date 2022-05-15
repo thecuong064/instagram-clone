@@ -7,6 +7,7 @@ import MainBottomTab from './MainBottomTab';
 import {UploadingOptionsModal} from '../modals/UploadingOptionsModal';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {ModalContainer} from '../modals/common/ModalContainer';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ const ApplicationNavigator = () => {
               options={{presentation: 'transparentModal'}}
             />
           </Stack.Navigator>
+          <ModalContainer />
         </NavigationContainer>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>

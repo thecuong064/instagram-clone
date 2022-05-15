@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LocalStorgeKeys from '../constants/LocalStorgeKeys';
+import {LocalStorgeKeys} from '../constants';
 
 const LocalStorageUtils = {
   storePosts: async newPosts => {

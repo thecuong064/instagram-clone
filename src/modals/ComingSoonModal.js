@@ -2,14 +2,16 @@ import React from 'react';
 import {View, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 import Modal from 'react-native-modal';
 import {LocalResources} from '../constants/LocalResources';
+import {dismissModal} from '../redux/common/actions/modalActions';
+import store from '../redux/configureStore';
 
 export const ComingSoonModal = props => {
-  const {isVisible, setIsVisble} = props;
+  const {isVisible} = props;
   return (
     <Modal
       isVisible={isVisible}
       style={styles.container}
-      onBackdropPress={() => console.log('hhell12')}>
+      onBackdropPress={() => store.dispatch(dismissModal())}>
       <View style={styles.middleModal}>
         <Image
           style={styles.image}
@@ -20,7 +22,7 @@ export const ComingSoonModal = props => {
           tuned.
         </Text>
         <TouchableOpacity
-          onPress={() => setIsVisble(false)}
+          onPress={() => store.dispatch(dismissModal())}
           activeOpacity={0.6}
           style={styles.dismissButtonWrapper}>
           <Text style={styles.dismissButtonText}>Got it</Text>
