@@ -1,4 +1,4 @@
-import ErrorMessages from '../constants/ErrorMessages';
+import {ErrorMessages} from '../constants';
 
 export const handleErrorMessage = error => {
   if (!error.status) {

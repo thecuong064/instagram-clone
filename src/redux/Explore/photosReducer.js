@@ -9,8 +9,6 @@ const initPhotos = {
 const photosReducer = (state = initPhotos, action) => {
   const {payload, type} = action;
 
-  console.log(type);
-
   switch (type) {
     case ApiActionTypes.RELOAD_EXPLORE_PHOTOS_SUCCESS: {
       return {

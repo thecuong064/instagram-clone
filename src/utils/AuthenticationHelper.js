@@ -1,5 +1,5 @@
 import SInfo from 'react-native-sensitive-info';
-import ErrorMessages from '../constants/ErrorMessages';
+import {ErrorMessages} from '../constants';
 
 const USERS_KEY = 'sensitiveInfo_Users';
 
