@@ -144,10 +144,6 @@ export const Home = ({navigation, route}) => {
         }
         onLoadMore={loadMorePosts}
       />
-      <ComingSoonModal
-        isVisible={isCommingSoonModalVisible}
-        setIsVisble={setIsCommingSoonModalVisible}
-      />
     </SafeAreaView>
   );
 };
