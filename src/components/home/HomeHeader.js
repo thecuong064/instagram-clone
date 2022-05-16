@@ -3,7 +3,8 @@ import React from 'react';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {LocalResources} from '../../constants/LocalResources';
 
-export const HomeHeader = () => {
+export const HomeHeader = props => {
+  const {onMessengerButtonPress} = props;
   return (
     <View style={styles.header}>
       <Image
@@ -11,7 +12,9 @@ export const HomeHeader = () => {
         resizeMode={'contain'}
         source={LocalResources.Images.instagram_text}
       />
-      <TouchableOpacity style={styles.headerMsgButtonWrapper}>
+      <TouchableOpacity
+        style={styles.headerMsgButtonWrapper}
+        onPress={onMessengerButtonPress}>
         <Image
           style={styles.headerMsgButtonImg}
           source={LocalResources.Icons.ic_message}
