@@ -8,8 +8,6 @@ const initStories = {
 const storiesReducer = (state = initStories, action) => {
   const {payload, type} = action;
 
-  console.log(type);
-
   switch (type) {
     case ApiActionTypes.LOAD_STORIES_SUCCESS: {
       return {

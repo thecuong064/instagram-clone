@@ -9,6 +9,8 @@ import {getStories, getMorePosts, reloadPosts} from '../../redux/Home/actions';
 import {ToastUtils} from '../../utils/ToastUtils';
 import {FooterLoadingIndicator} from '../../components/general';
 import {ComingSoonModal} from '../../modals';
+import {Modals} from '../../constants';
+import {showModal} from '../../redux/common/actions/modalActions';
 
 export const Home = ({navigation, route}) => {
   const feedRef = useRef(null);
@@ -116,7 +118,9 @@ export const Home = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <HomeHeader
-        onMessengerButtonPress={() => setIsCommingSoonModalVisible(true)}
+        onMessengerButtonPress={() =>
+          store.dispatch(showModal(Modals.ComingSoon))
+        }
       />
       <View style={styles.dividerLine} />
       <HomeFeed
@@ -139,10 +143,6 @@ export const Home = ({navigation, route}) => {
           />
         }
         onLoadMore={loadMorePosts}
-      />
-      <ComingSoonModal
-        isVisible={isCommingSoonModalVisible}
-        setIsVisble={setIsCommingSoonModalVisible}
       />
     </SafeAreaView>
   );

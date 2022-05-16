@@ -9,8 +9,6 @@ const initPosts = {
 const postsReducer = (state = initPosts, action) => {
   const {payload, type} = action;
 
-  console.log(type);
-
   switch (type) {
     case ApiActionTypes.RELOAD_POSTS_SUCCESS: {
       return {

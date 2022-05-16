@@ -6,6 +6,7 @@ import photosReducer from './Explore/photosReducer';
 import {persistReducer} from 'redux-persist';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {modalReducer} from './common/reducers/modalReducer';
 
 const storiesPersistConfig = {
   key: '@redux-persist/stories',
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   stories: persistReducer(storiesPersistConfig, storiesReducer),
   posts: persistReducer(postsPersistConfig, postsReducer),
   explorePhotos: persistReducer(explorePhotosPersistConfig, photosReducer),
+  modal: modalReducer,
 });
 
 export default rootReducer;
